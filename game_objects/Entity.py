@@ -44,15 +44,9 @@ class Entity(Sprite):
         if self.falling and (self.gravity != 0 and self.gravity is not None):
             self.yvel += self.gravity
 
-        self.
-
-        #Generic Collision code or something
+        self.rect.x += self.x_velocity
+        self.rect.y += self.y_velocity
 
     def render(self, screen):
         if self.image and self.rect and self.visible is True:
-            self.screen.blit(self.image, self.rect);
-
-    def jump(self):
-        if self.jumping is False and self.falling is False:
-            self.jumping = True
-            self.y_velocity = -self.jump_velocity
+            screen.blit(self.image, (self.rect.x, self.rect.y));

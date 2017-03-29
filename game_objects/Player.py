@@ -11,7 +11,6 @@ class Player(Entity):
     key_right = pygame.K_D
 
     def update(self):
-        super(Player, self).update()
 
         key = pygame.key.get_pressed()
 
@@ -34,8 +33,7 @@ class Player(Entity):
             self.y_velocity = math.sin(direction)*self.max_velocity
             self.x_velocity = math.cos(direction)*self.max_velocity
 
-        self.rect.x += self.x_velocity
-        self.rect.y += self.y_velocity
+        super(Player, self).update()
 
     def move_up(self):
         self.yvelocity -= self.base_acceleration
