@@ -39,9 +39,11 @@ class Entity(Sprite):
     def update(self):
         if self.falling and (self.gravity != 0 and self.gravity is not None):
             self.yvel += self.gravity
+        self.rect.x += self.x_velocity
+        self.rect.y += self.y_velocity
 
         #Generic Collision code or something
 
     def render(self, screen):
         if self.image and self.rect and self.visible is True:
-            self.screen.blit(self.image, self.rect);
+           screen.blit(self.image, (self.rect.x, self.rect.y));
