@@ -6,9 +6,9 @@ from TileMap import *
 
 
 class World:
-    def __init__(self, screen):
+    def __init__(self, screen, resources):
         self.entities = []
-        self.resources = self.load_resources("resources.csv")
+        self.resources = resources
         self.tilemap = TileMap("map1.csv", self.resources)
         ball_sprite = pygame.image.load("test.gif")
         ball = Entity(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
@@ -42,14 +42,4 @@ class World:
                 self.entities[0].x_velocity = 0
         return True
 
-    def load_resources(self, filename):
-        resources = {}
-        with open(filename) as f:
-            reader = csv.reader(f)
-            next(reader, None)
-            # id,name,filename,type
-            for line in reader:
-                res_id, name, filename, type = line
-                resources[res_id] = Resource(res_id, name, filename, type)
-        return resources
 
