@@ -34,6 +34,9 @@ class Player(Entity):
             self.y_velocity = math.sin(direction)*self.max_velocity
             self.x_velocity = math.cos(direction)*self.max_velocity
 
+        self.rect.x += self.x_velocity
+        self.rect.y += self.y_velocity
+
     def move_up(self):
         self.yvelocity -= self.base_acceleration
 
