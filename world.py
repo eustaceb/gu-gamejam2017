@@ -10,6 +10,7 @@ class World:
         self.entities = []
         self.resources = self.load_resources("resources.csv")
         self.tilemap = TileMap("map1.csv", self.resources)
+        print(self.tilemap.data)
         ball_sprite = pygame.image.load("test.gif")
         ball = Entity(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
         self.entities.append(ball)

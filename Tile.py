@@ -26,3 +26,6 @@ class Tile:
 
     def get_image(self):
         return self.resource.get_image()
+    
+    def __str__(self):
+        return"(%d %d %d %d)"%(self.x, self.y, self.width, self.height)
