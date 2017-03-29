@@ -10,18 +10,17 @@ class World:
         self.entities = []
         self.resources = resources
         self.tilemap = TileMap("map1.csv", self.resources)
-        print(self.tilemap.data)
         ball_sprite = pygame.image.load("test.gif")
         ball = Entity(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
         self.entities.append(ball)
     
     def render(self, screen):
         screen.fill((0,0,0))
-        for tile in self.tilemap:
-            pos = tile.get_x() * tile.get_width(), tile.get_y() * tile.get_height()
-            screen.blit(tile.get_image(), pos)
+
+        self.tilemap.render(screen)
         for ent in self.entities:
             ent.render(screen)
+        #screen.blit(self.tilemap.data[0][0].get_image(), (300,400))
         pygame.display.flip()
 
     def update(self):

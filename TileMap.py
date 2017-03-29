@@ -12,7 +12,7 @@ class TileMap:
         self.data = []
         self.resources = res
         self.filename = filename
-        if filename != "":
+        if filename: 
             self.load(filename)
 
     def load(self, filename):
@@ -51,4 +51,9 @@ class TileMap:
             raise StopIteration
         else:
             self.current += 1
-            return self.data[self.current / self.rows][self.current % self.rows]
+            return self.data[self.cols / self.rows][self.current % self.rows]
+
+    def render(self, screen):
+        for t in self:
+            print(t)
+            t.render(screen)
