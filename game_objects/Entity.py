@@ -22,7 +22,7 @@ class Entity(Sprite):
         self.solid = solid
         self.visible = visible
 
-    def update(self):
+    def update(self, **kwargs):
         pass
 
     def render(self, screen, camera):
