@@ -1,14 +1,18 @@
 from .Entity import Entity
+
 import pygame
 import math
 
 # Wow its a playar
 class Player(Entity):
 
-    key_up = pygame.K_W
-    key_down = pygame.K_S
-    key_left = pygame.K_A
-    key_right = pygame.K_D
+    key_up = pygame.K_w
+    key_down = pygame.K_s
+    key_left = pygame.K_a
+    key_right = pygame.K_d
+    
+    def __init__(self, **kwargs):
+        super(Player, self).__init__(**kwargs)
 
     def __init__(self):
         super(Player, self).__init__()

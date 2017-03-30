@@ -1,5 +1,6 @@
 import pygame
 from game_objects.Entity import *
+from game_objects.Player import *
 import pygame, csv
 from Resource import *
 from TileMap import *
@@ -12,7 +13,7 @@ class World:
         self.tilemap = TileMap("map1.csv", self.resources)
         print(len(self.tilemap.data))
         ball_sprite = pygame.image.load("test.gif")
-        ball = Entity(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
+        ball = Player(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
         self.entities.append(ball)
     
     def render(self, screen):
@@ -32,15 +33,6 @@ class World:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 return False 
-            elif event.key == pygame.K_d:
-                self.entities[0].x_velocity = 400/60.0
-            elif event.key == pygame.K_a:
-                self.entities[0].x_velocity = -400/60.0 
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_d:
-                self.entities[0].x_velocity = 0
-            elif event.key == pygame.K_a:
-                self.entities[0].x_velocity = 0
+        if event.type == pygame.QUIT: return False
         return True
-
 

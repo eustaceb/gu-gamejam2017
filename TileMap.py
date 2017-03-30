@@ -24,8 +24,9 @@ class TileMap:
                 current_row = []
                 x = 0
                 for col in line:
-                    tile = Tile(x, y, self.tile_w, self.tile_h, self.resources[col])
-                    self.data[(x,y)] = tile
+                    if not col == "#": 
+                        tile = Tile(x, y, self.tile_w, self.tile_h, self.resources[col])
+                        self.data[(x,y)] = tile
                     x += 1
                     count += 1
                 y += 1
