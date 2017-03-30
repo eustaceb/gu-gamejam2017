@@ -1,30 +1,43 @@
+//Top grass
+@collide off
+@offset 0 384
+@repeat_h 212
+f
+
+//Top grassy dirt
+@offset 0 448
+@repeat_h 212
+g
+
+//Deep dirt
+@offset 0 512
+@repeat_h 212
+@repeat_v 3
+d
+
 //Left hand side invisible wall
-@offset 0 0
-@repeat_v 5
+@offset 320 0
+@repeat_v 7
 i
 
 //Ceiling invisible wall
-@offset 64 0
+@offset 384 0
 @repeat_h 200
 i
 
 //Right hand side invisible wall
-@offset 12928 0
-@repeat_v 5
+@offset 13184 0
+@repeat_v 7
 i
 
-//Ground
-@offset 0 384
-@repeat_h 202
-0
-
-@offset 100 200
+//Player
+@offset 500 200
 p
 
-@offset 500 340
+@offset 700 340
 t
 
-@offset 700 339
+@offset 950 339
 h
 
 @collide off

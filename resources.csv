@@ -1,6 +1,9 @@
 id,name,filename,type
 p, player, ./assets/ufo.png, player
 0, test, ./assets/new_grass.png, tile
+g, test, ./assets/new_new_grass.png, tile
+d, test, ./assets/dirt.png, tile
+f, test, ./assets/grass_top.png, tile
 i, test, ./assets/invisible_block.png, tile
 t, pink_turret, ./assets/pink_cannon.png, turret
 h , test, ./assets/house_windows.png, house
