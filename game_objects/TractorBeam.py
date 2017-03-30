@@ -18,7 +18,6 @@ class TractorBeam(Entity):
 
         if key[self.key_activate]:
             self.enabled = True
-            print("WEWEWEWEW")
         else:
             self.enabled = False
 
