@@ -13,7 +13,7 @@ class Entity(Sprite):
     x_velocity = 0
     y_velocity = 0
 
-    base_acceleration = 5
+    base_acceleration =0.1 
     max_velocity = 10
 
     # Other properties

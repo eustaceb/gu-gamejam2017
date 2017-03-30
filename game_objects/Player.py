@@ -16,7 +16,7 @@ class Player(Entity):
     def update(self):
 
         key = pygame.key.get_pressed()
-
+        
         if key[self.key_up]:
             if not key[self.key_down]:
                 self.move_up()
