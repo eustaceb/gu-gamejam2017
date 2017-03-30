@@ -17,9 +17,7 @@ class Map:
     def entity_spawn(self, resource, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, resource.image.get_width(), resource.image.get_height())
-        if resource.id == "p":
-            self.player = Player(image=resource.image, **kwargs)
-        elif resource.type == "turret":
+        if resource.type == "turret":
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, 64, 64)
             return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
         else:
@@ -107,9 +105,9 @@ class Map:
                             if tokens[1].isalnum() and tokens[2].isalnum():
                                 tile_repeat = int(tokens[1])
                                 row_repeat = int(tokens[2])
-                    elif tokens[0] == "@background":
+                    elif tokens[0] == "@bg":
                         layer="bg"
-
+                    continue
 
 
 
@@ -134,6 +132,10 @@ class Map:
                                 )
                                 tiles.append(tile)
                                 tile_map_populated = True
+                            elif tile_res.type == "player":
+                                rect = pygame.Rect(offset_x + x, offset_y + y, tile_res.image.get_width(),
+                                                   tile_res.image.get_height())
+                                self.player = Player(image=tile_res.image, rect=rect)
                             else:
                                 self.entities.append(self.entity_spawn(
                                     resource=tile_res,
@@ -158,10 +160,7 @@ class Map:
                     tile_map.cols = cols
                     tile_map.collides = collides
                     self.tilemaps[layer] = tile_map
-        # Set player for turrets
-        for i in range(len(self.entities)):
-            if isinstance(self.entities[i], Turret):
-                self.entities[i].set_player(self.player)
+                    print(layer)
 
         self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x:x[0], reverse=True))
 
