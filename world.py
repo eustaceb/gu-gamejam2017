@@ -22,8 +22,8 @@ class World:
 
         self.tilemap.render(screen,self.camera)
         for ent in self.entities:
-            ent.render(screen, camera)
-        #screen.blit(self.tilemap.data[0][0].get_image(), (300,400))
+            ent.render(screen, self.camera)
+        self.player.render(screen, self.camera)
         pygame.display.flip()
 
     def update(self):
