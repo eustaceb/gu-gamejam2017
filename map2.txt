@@ -9,6 +9,9 @@ p
 @offset 500 750
 t
 
+@offset 700 750
+h
+
 @collide off
 @bg
 @offset 0 0

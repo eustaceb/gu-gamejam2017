@@ -5,6 +5,7 @@ import pygame, csv
 from Resource import *
 from TileMap import *
 from Map import *
+from game_objects.House import *
 from collections import deque
 
 from game_objects.Villager import Villager
@@ -12,7 +13,7 @@ from game_objects.Villager import Villager
 
 class World:
     def __init__(self, screen, resources):
-        self.font = pygame.font.SysFont("Verdana", 25)
+        self.font = pygame.font.SysFont("Arial", 25)
         self.tilemaps = {}
         self.entities = []
         self.bullets = pygame.sprite.Group()
@@ -22,13 +23,15 @@ class World:
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)
         self.entities.append(Villager(self.player.rect.x, self.player.rect.y, player=self.player))
 
-        # Set player and world for turrets
+        # Set player and world for turrets; house images for houses
+        house_images = [resources["h1"].image, resources["h2"].image, resources["h3"].image,
+                        resources["h4"].image, resources["h5"].image]
         for i in range(len(self.entities)):
             if isinstance(self.entities[i], Turret):
                 self.entities[i].set_player(self.player)
                 self.entities[i].set_world(self)
-
-        player_sprite = pygame.image.load("assets/ufo.png")
+            elif isinstance(self.entities[i], House):
+                self.entities[i].set_images(house_images)
 
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
         self.bg_surface = pygame.Surface(screen.get_size())
@@ -51,7 +54,9 @@ class World:
         self.player.render(screen, self.camera)
 
         health_text = self.font.render("Health: " + str(self.player.health), 1, (255, 0, 0))
+        score_text = self.font.render("Score: " + str(self.player.score), 1, (255, 0, 0))
         screen.blit(health_text, (0, 0))
+        screen.blit(score_text, (0, 50))
 
     def update(self, time_now):
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities, bullets=self.bullets)
