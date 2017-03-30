@@ -29,14 +29,14 @@ class World:
         for tilemap in self.tilemaps.itervalues():
             tilemap.render(screen, self.camera)
 
-        #for ent in self.entities:
-        #    ent.render(screen, self.camera)
+        for ent in self.entities:
+            ent.render(screen, self.camera)
         self.player.render(screen, self.camera)
 
     def update(self):
         self.player.update(self.map.tilemaps.itervalues(), self.entities)
-        #for ent in self.entities:
-        #    ent.update()
+        for ent in self.entities:
+            ent.update()
         self.camera.center = self.player.rect.center
 
     def process_event(self, event):
