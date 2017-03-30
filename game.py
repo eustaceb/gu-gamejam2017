@@ -12,13 +12,15 @@ def load_resources(filename):
         next(reader, None)
         # id,name,filename,type
         for line in reader:
-            res_id, name, filename, type = line
-            res_id=res_id.strip()
-            resources[res_id] = Resource(res_id, name, filename.strip(), "tile")
+            res_id, name, filename, res_type = line
+            res_id = res_id.strip()
+            resources[res_id] = Resource(res_id, name.strip(), filename.strip(), res_type.strip())
     return resources
+
 
 def load_entity_resources():
     return {"p" : Resource("p", "player", "assets/ufo.png", "entity")}
+
 
 def load_all_image_resources_as_tiles():
     resources = {}
@@ -37,7 +39,7 @@ def main():
 
     screen = pygame.display.set_mode((width,height))
     resources = load_resources("resources.csv")
-    resources.update(load_entity_resources())
+    #resources.update(load_entity_resources())
     print(resources.keys())
     game_world = World(screen, resources)
     clock = pygame.time.Clock()

@@ -6,8 +6,9 @@ from .Entity import Entity
 from collections import deque
 import pygame
 
+
 class Turret(Entity):
-    def __init__(self, rect, image, player=None, bullet_image=None,
+    def __init__(self, image, player=None, bullet_image=None,
                  shoot_interval=1000, range=500, bullet_lifetime=5000, **kwargs):
         self.bullet_image = bullet_image
         self.shoot_interval = shoot_interval  # in milliseconds
@@ -16,7 +17,7 @@ class Turret(Entity):
         self.range = range
         self.shots = deque()
         self.bullet_lifetime = bullet_lifetime
-        super(Turret, self).__init__(rect=rect, image=image, **kwargs)
+        super(Turret, self).__init__(image=image, **kwargs)
 
     def set_player(self, player):
         self.player = player

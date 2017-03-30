@@ -16,10 +16,11 @@ class Map:
 
     def entity_spawn(self, resource, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
-            kwargs["rect"] = pygame.Rect(x_pos, y_pos, 128, 128)
+            kwargs["rect"] = pygame.Rect(x_pos, y_pos, resource.image.get_width(), resource.image.get_height())
         if resource.id == "p":
             self.player = Player(image=resource.image, **kwargs)
         elif resource.type == "turret":
+            kwargs["rect"] = pygame.Rect(x_pos, y_pos, 64, 64)
             return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
         else:
             return Entity(image=resource.image, **kwargs)
@@ -125,7 +126,7 @@ class Map:
                     for id in tile_ids:
                         if id.isalnum():
                             tile_res = resources[id]
-                            if "tile" in tile_res.type:
+                            if tile_res.type == "tile":
                                 tile = Tile(
                                     rect=pygame.Rect(offset_x + x, offset_y + y, tile_res.image.get_width(),
                                                      tile_res.image.get_height()),
@@ -134,13 +135,11 @@ class Map:
                                 tiles.append(tile)
                                 tile_map_populated = True
                             else:
-                                self.entity_spawn(
-                                    id = tile_res.id,
-                                    resource = tile_res,
-                                    image = tile_res.image,
-                                    x_pos = offset_x+x,
-                                    y_pos = offset_y+y
-                                )
+                                self.entities.append(self.entity_spawn(
+                                    resource=tile_res,
+                                    x_pos=offset_x + x,
+                                    y_pos=offset_y + y
+                                ))
                         x += tile_w
                         this_cols += 1
                         if this_cols >= row_len:
