@@ -17,9 +17,7 @@ class Map:
     def entity_spawn(self, resource, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, resource.image.get_width(), resource.image.get_height())
-        if resource.id == "p":
-            self.player = Player(image=resource.image, **kwargs)
-        elif resource.type == "turret":
+        if resource.type == "turret":
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, 64, 64)
             return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
         else:
@@ -134,7 +132,13 @@ class Map:
                                 )
                                 tiles.append(tile)
                                 tile_map_populated = True
+                            elif tile_res.type == "player":
+                                print "playa"
+                                rect = pygame.Rect(offset_x + x, offset_y + y, tile_res.image.get_width(),
+                                                   tile_res.image.get_height())
+                                self.player = Player(image=tile_res.image, rect=rect)
                             else:
+                                print "WOAH"
                                 self.entities.append(self.entity_spawn(
                                     resource=tile_res,
                                     x_pos=offset_x + x,
