@@ -37,6 +37,21 @@ class TileMap:
         if y != 0:
             self.rows = y
             self.cols = count / self.rows
+    
+    @static_method
+    def parse_map(filename):
+        with open(filename, "r") as f:
+            for line in f.readlines():
+                line_strip = line.strip()
+                if len(line_strip) == 0:
+                     
+                elif line_strip[0] == "/"
+                    
+                if line_strip[0] == "@":
+                    tokens = line_strip.split()
+                    if tokens[0] == "@offset":
+                        if len(tokens) >= 3:
+                            offset = int(tokens[1]), int(tokens[2])
 
     def get_dimensions(self):
         return self.rows, self.cols
