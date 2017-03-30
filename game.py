@@ -18,18 +18,18 @@ def load_resources(filename):
             resources[res_id] = Resource(res_id, name.strip(), filename.strip(), res_type.strip())
     return resources
 
-
-def load_entity_resources():
-    return {"p" : Resource("p", "player", "assets/ufo.png", "entity")}
-
-
-def load_all_image_resources_as_tiles():
-    resources = {}
-    files = ["./assets/" + f for f in os.listdir("./assets") if f.endswith(".png") or f.endswith(".jpg") or f.endswith("gif") ]
-    print(files)
-    for i,v in enumerate(files):
-        resources[str(i)] = Resource(str(i), v.lstrip("./assets")[:v.index(".")],v,"tile")
-    return resources
+#
+# def load_entity_resources():
+#     return {"p" : Resource("p", "player", "assets/ufo.png", "entity")}
+#
+#
+# def load_all_image_resources_as_tiles():
+#     resources = {}
+#     files = ["./assets/" + f for f in os.listdir("./assets") if f.endswith(".png") or f.endswith(".jpg") or f.endswith("gif") ]
+#     print(files)
+#     for i,v in enumerate(files):
+#         resources[str(i)] = Resource(str(i), v.lstrip("./assets")[:v.index(".")],v,"tile")
+#     return resources
 
 def main():
     pygame.init()
@@ -41,7 +41,6 @@ def main():
     screen = pygame.display.set_mode((int(width),int(height)),  )
     resources = load_resources("resources.csv")
     #resources.update(load_entity_resources())
-    print(resources.keys())
     game_world = World(screen, resources)
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()
@@ -53,14 +52,10 @@ def main():
 
         time_now = pygame.time.get_ticks()
         if (time_now - time_prev) >= 1000/60.0:
-            game_world.update()
+            game_world.update(time_now)
             pygame.display.update((0,0,width,height))
             game_world.render(screen)
             time_prev = time_now
-
-
-    print(width, height)
-    print("Hello world")
 
 if __name__ == "__main__":
     main()

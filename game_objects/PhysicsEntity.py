@@ -13,7 +13,7 @@ class PhysicsEntity(Entity):
     x_acceleration = 0
     y_acceleration = 0
 
-    base_acceleration = 0.3
+    base_acceleration = 1
     base_friction = 0.1
 
     max_velocity = 10
@@ -45,15 +45,16 @@ class PhysicsEntity(Entity):
         self.jumping = jumping
         self.falling = falling
 
-    def update(self, tilemap=None, entities=None ):
-        if self.falling and (self.gravity != 0 and self.gravity is not None):
-            self.y_velocity += self.gravity
+    def update(self, tilemap=None, entities=None, **kwargs):
+        if(self.gravity != 0 and self.gravity is not None):
+            if self.falling:
+                self.y_velocity += self.gravity
+            elif self.blocked_bottom is False:
+                self.falling = True
 
         self.x_velocity += self.x_acceleration
         self.y_velocity += self.y_acceleration
 
-        print(self.x_velocity)
-        print(self.x_acceleration)
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
         if velocity > self.max_velocity:
@@ -91,16 +92,17 @@ class PhysicsEntity(Entity):
                     if collision.top(newrect, tile.rect):  # Moving down; Hit the top side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
+                        self.falling = False
 
-                        if self.rect.bottom > tile.rect.top:
-                            self.rect.bottom = tile.rect.top
+                        print("top")
+
+                        self.rect.bottom = tile.rect.top
 
                         self.blocked_bottom = True
 
                     if collision.bottom(newrect, tile.rect):  # Moving up; Hit the bottom side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
-                        self.falling = False
                         self.jumping = False
 
                         if self.rect.top < tile.rect.bottom:

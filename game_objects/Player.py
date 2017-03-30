@@ -9,6 +9,7 @@ class Player(PhysicsEntity):
 
     health = 5
     tractor_beam = None
+    score = 0
 
     rotation_angle = 0
     max_rotation = 15
@@ -22,10 +23,13 @@ class Player(PhysicsEntity):
     def __init__(self, **kwargs):
         self.tractor_beam = TractorBeam(rect=Rect(0,0,64,64), player=self)
 
+        if kwargs.get("gravity") is None:
+            kwargs["gravity"] = 0
+
         super(Player, self).__init__(**kwargs)
         self.original_image = self.image
 
-    def update(self, tilemap, entities, bullets):
+    def update(self, tilemap=None, entities=None, bullets=None, **kwargs):
 
         key = pygame.key.get_pressed()
 
