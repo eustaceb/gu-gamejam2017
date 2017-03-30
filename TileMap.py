@@ -16,6 +16,7 @@ class TileMap(Group):
         self.current = -1
         self.resources = res
         self.filename = filename
+        self.collides = True
 
         if filename: 
             self.load(filename)
@@ -48,3 +49,5 @@ class TileMap(Group):
         for sprite in self:
             screen.blit(sprite.image, (sprite.rect.x-camera.x, sprite.rect.y-camera.y))
 
+    def __str__(self):
+        return "%s, collides: %s"%(str(super(TileMap, self)), self.collides)
