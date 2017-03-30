@@ -54,5 +54,5 @@ class TileMap:
             return self.data[( self.current % self.rows, self.cols / self.rows) ]
 
     def render(self, screen):
-        for t in self:
+        for t in self.data.values():
             t.render(screen)
