@@ -9,7 +9,7 @@ import pygame
 
 class Turret(Entity):
     def __init__(self, image, world=None, player=None, bullet_image=None,
-                 shoot_interval=20, range=500, bullet_lifetime=5000, **kwargs):
+                 shoot_interval=20, range=500, bullet_lifetime=200, **kwargs):
         self.bullet_image = bullet_image
         self.shoot_interval = shoot_interval  # in milliseconds
         self.counter = 0
@@ -42,5 +42,4 @@ class Turret(Entity):
         self.counter += 1
 
     def shoot(self, target_pos, lifetime):
-        self.world.bullets.append(Bullet(self.rect.midtop, target_pos, lifetime, bullet_image=self.bullet_image))
-        print "YE"
+        self.world.bullets.add(Bullet(self.rect.midtop, target_pos, lifetime, bullet_image=self.bullet_image))

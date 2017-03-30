@@ -1,7 +1,7 @@
 id,name,filename,type
 p, player, ./assets/ufo.png, player
 0, test, ./assets/new_grass.png, tile
-1, pink_turret, ./assets/pink_cannon.png, turret
+t, pink_turret, ./assets/pink_cannon.png, turret
 4  , test, ./assets/starry_night_moon.png, tile
 5  , test, ./assets/block_guy_brown_green.png, tile
 6  , test, ./assets/girl_walk.png, tile
