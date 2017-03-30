@@ -16,7 +16,7 @@ class TractorBeam(Entity):
     def update(self, *args):
         key = pygame.key.get_pressed()
 
-        if key[self.key_activate]:
+        if key[self.key_activate] and self.player.x_velocity==0:
             self.enabled = True
         else:
             self.enabled = False

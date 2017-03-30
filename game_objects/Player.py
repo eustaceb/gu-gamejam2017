@@ -23,6 +23,9 @@ class Player(PhysicsEntity):
     def __init__(self, **kwargs):
         self.tractor_beam = TractorBeam(rect=Rect(0,0,64,64), player=self)
 
+        if kwargs.get("gravity") is None:
+            kwargs["gravity"] = 0
+
         super(Player, self).__init__(**kwargs)
         self.original_image = self.image
 

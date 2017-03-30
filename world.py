@@ -56,7 +56,7 @@ class World:
     def update(self):
         self.player.update(self.map.tilemaps.itervalues(), self.entities, self.bullets)
         for ent in self.entities:
-            ent.update()
+            ent.update(self.map.tilemaps.itervalues())
         for bul in self.bullets:
             bul.update()
         self.camera.center = self.player.rect.center

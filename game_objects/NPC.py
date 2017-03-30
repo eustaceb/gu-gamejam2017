@@ -24,7 +24,7 @@ class NPC(PhysicsEntity):
         self.tractor = Group(player.tractor_beam)
         super(NPC, self).__init__(rect, image, **kwargs)
 
-    def update(self):
+    def update(self, tilemap=None, entities=None):
         if self.direction == Direction.LEFT:
             pass
             #self.move_left()
@@ -34,21 +34,19 @@ class NPC(PhysicsEntity):
         else:
             self.slow()
 
-        switch_direction = random.randint(0,1000)
+        switch_direction = random.randint(0,100)
         if switch_direction == 0:
             if self.direction == Direction.LEFT:
                 self.direction = Direction.RIGHT
             else:
                 self.direction = Direction.LEFT
-        elif switch_direction == 1000:
+        elif switch_direction == 100:
             self.direction = Direction.STATIONARY
 
-        if(not self.blocked_bottom):
-            falling = True
-
-        super(NPC, self).update()
+        super(NPC, self).update(tilemap, entities)
 
     def handle_collisions(self, tilemap):
+        print("wut")
         super(NPC, self).handle_collisions(tilemap)
 
         tractors = pygame.sprite.spritecollide(self, self.tractor, False)
