@@ -31,6 +31,7 @@ class World:
         for ent in self.entities:
             ent.update()
         self.camera.center = self.player.rect.center
+
     def process_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
