@@ -1,5 +1,6 @@
 import math
 from pygame.sprite import Sprite, spritecollide
+from helpers import collision
 
 
 #This class represents every entity in the game
@@ -70,18 +71,28 @@ class Entity(Sprite):
             if(collisions):
                 for tile in collisions:
                     print("collision")
-                    if self.x_velocity > 0:  # Moving right; Hit the left side of the wall
-                        self.x_velocity = 0
-                        self.x_acceleration = 0
-                    elif self.x_velocity < 0:  # Moving left; Hit the right side of the wall
-                        self.x_velocity = 0
-                        self.x_acceleration = 0
-                    if self.y_velocity > 0:  # Moving down; Hit the top side of the wall
+
+                    if collision.top(self, tile):  # Moving down; Hit the top side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
-                    if self.y_velocity < 0:  # Moving up; Hit the bottom side of the wall
+                        self.rect.bottom = tile.rect.top
+
+                    elif collision.bottom(self, tile):  # Moving up; Hit the bottom side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
+                        self.rect.top = tile.rect.bottom
+
+                    elif collision.left(self, tile):  # Moving right; Hit the left side of the wall
+                        print("left")
+                        self.x_velocity = 0
+                        self.x_acceleration = 0
+                        self.rect.right = tile.rect.left
+                    elif collision.right(self, tile):  # Moving left; Hit the right side of the wall
+                        self.x_velocity = 0
+                        self.x_acceleration = 0
+                        self.rect.left = tile.rect.right
+
+
 
         self.rect.x += self.x_velocity
         self.rect.y += self.y_velocity
