@@ -9,7 +9,7 @@ class TileMap:
         self.cols = 0
         self.rows = 0
         self.current = -1
-        self.data = []
+        self.data = {}
         self.resources = res
         self.filename = filename
         if filename: 
@@ -25,10 +25,9 @@ class TileMap:
                 x = 0
                 for col in line:
                     tile = Tile(x, y, self.tile_w, self.tile_h, self.resources[col])
-                    current_row += [tile]
+                    self.data[(x,y)] = tile
                     x += 1
                     count += 1
-                self.data += [current_row]
                 y += 1
         if y != 0:
             self.rows = y
@@ -41,7 +40,7 @@ class TileMap:
         return self.data
 
     def get_tile(self, x, y):
-        return self.data[y][x]
+        return self.data((x,y))
 
     def __iter__(self):
         self.current = 0
@@ -52,7 +51,7 @@ class TileMap:
             raise StopIteration
         else:
             self.current += 1
-            return self.data[self.cols / self.rows][self.current % self.rows]
+            return self.data[( self.current % self.rows, self.cols / self.rows) ]
 
     def render(self, screen):
         for t in self:
