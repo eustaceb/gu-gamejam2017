@@ -13,6 +13,7 @@ def load_resources(filename):
         # id,name,filename,type
         for line in reader:
             res_id, name, filename, type = line
+            res_id=res_id.strip()
             resources[res_id] = Resource(res_id, name, filename.strip(), "tile")
     return resources
 
@@ -37,6 +38,7 @@ def main():
     screen = pygame.display.set_mode((width,height))
     resources = load_resources("resources.csv")
     resources.update(load_entity_resources())
+    print(resources.keys())
     game_world = World(screen, resources)
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()

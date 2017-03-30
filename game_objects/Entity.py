@@ -67,7 +67,8 @@ class Entity(Sprite):
         if tilemap:
             collisions = []
             for x in tilemap:
-                collisions += spritecollide(self, x, False) 
+                if x.collides:
+                    collisions += spritecollide(self, x, False) 
 
             if(collisions):
                 for tile in collisions:

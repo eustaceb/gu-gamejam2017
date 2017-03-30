@@ -29,6 +29,7 @@ class Map:
             tile_w, tile_h = 64,64
             this_cols = 0
             y=0
+            collides=True
             layer = 0 
             offset_x, offset_y = 0,0
             for line in f.readlines():
@@ -39,7 +40,7 @@ class Map:
                         tile_map.add(tiles)
                         tile_map.rows = rows
                         tile_map.cols = cols
-                        tile_map.collides = True
+                        tile_map.collides = collides
                         self.tilemaps[layer] = tile_map
                         layer += 1
                         tile_map_populated = False
@@ -47,6 +48,7 @@ class Map:
                         rows,cols = 0,0
                         tile_w, tile_h = 64,64
                         offset_x, offset_y = 0,0
+                        collides = True
                     else:
                         continue
                 elif (line_strip[0] == "/") :
@@ -59,6 +61,13 @@ class Map:
                     elif tokens[0] == "@tile_size":
                         if len(tokens) >= 3:
                             tile_w, tile_h = int(tokens[1]), int(tokens[2])
+                    elif tokens[0] == "@collide":
+                        if len(tokens) >= 2:
+                            if tokens[1] == "off":
+                                collides = False
+                            else:
+                                collides = True
+
                 else:
                     tile_ids = [x.strip() for x in line_strip.split(",")]
                     x = 0
@@ -68,7 +77,7 @@ class Map:
                             tile_res = resources[id]
                             if tile_res.type == "tile":
                                 tile = Tile(
-                                    rect = pygame.Rect(offset_x+x, offset_y+y, tile_w, tile_h), 
+                                    rect = pygame.Rect(offset_x+x, offset_y+y, tile_res.image.get_width(), tile_res.image.get_height()), 
                                     image = resources[id].get_image()
                                 )
                                 tiles.append(tile)
@@ -94,7 +103,7 @@ class Map:
                     print(tile_map)
                     tile_map.rows = rows
                     tile_map.cols = cols
-                    tile_map.collides = True
+                    tile_map.collides = collides
                     self.tilemaps[layer] = tile_map
 
     def render(self, screen, camera):
