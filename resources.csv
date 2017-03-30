@@ -1,2 +1,31 @@
-id,name,filename,type
-0,grass,assets/new_grass.png,solid
+id,name,filename,type    
+0, test, ./assets/new_grass.png, tile
+4  , test, ./assets/starry_night_moon.png, 4   
+5  , test, ./assets/block_guy_brown_green.png, 5   
+6  , test, ./assets/girl_walk.png, 6   
+7  , test, ./assets/alien_beam.png, 7   
+8  , test, ./assets/block_guy_brown_red.png, 8   
+9  , test, ./assets/block_guy_yellow_green.png, 9   
+10 , test, ./assets/block_guy_white_green.png, 10  
+11 , test, ./assets/pepper_grass.png, 11  
+12 , test, ./assets/block_guy_yellow_blue.png, 12  
+13 , test, ./assets/house_windows_damaged_final.png, 13  
+14 , test, ./assets/block_guy_white_blue.png, 14  
+15 , test, ./assets/simple_house.png, 15  
+16 , test, ./assets/block_guy_brown_blue.png, 16  
+17 , test, ./assets/block_guy_white_red.png, 17  
+18 , test, ./assets/ufo.png, 18  
+19 , test, ./assets/yellow_laser.png, 19  
+20 , test, ./assets/house_windows_damaged_3.png, 20  
+21 , test, ./assets/block_guy_yellow_red.png, 21  
+22 , test, ./assets/block_guy_yellow_pink.png, 22  
+23 , test, ./assets/house_windows.png, 23  
+24 , test, ./assets/block_guy_white_pink.png, 24  
+25 , test, ./assets/house_windows_damaged_1.png, 25  
+26 , test, ./assets/block_guy_brown_pink.png, 26  
+27 , test, ./assets/starry_night.png, 27  
+28 , test, ./assets/green_laser.png, 28  
+29 , test, ./assets/red_laser.png, 29  
+30 , test, ./assets/house_windows_damaged_4.png, 30  
+31 , test, ./assets/girl_walk_stand.png, 31  
+32 , test, ./assets/house_windows_damaged_2.png, 32  
