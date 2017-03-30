@@ -21,7 +21,9 @@ class Entity(Sprite):
         self.solid = solid
         self.visible = visible
 
-       
+    def update(self):
+        pass
+
     def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:
             screen.blit(self.image, (self.rect.x-camera.x, self.rect.y-camera.y))

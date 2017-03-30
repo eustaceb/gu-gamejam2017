@@ -5,19 +5,23 @@ from Tile import *
 
 from game_objects.Entity import *
 from game_objects.Player import *
+from game_objects.TractorBeam import TractorBeam
+
 
 class Map:
     def __init__(self):
         self.tilemaps = {}
         self.entities = []
         self.player=None
-    
+
+    def create_player(self, **kwargs):
+        self.player = Player(**kwargs)
 
     def entity_spawn(self, id, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, 128, 128)
         if id == "p":
-            self.player = Player(**kwargs)
+            self.create_player(**kwargs)
         else:
             self.entities.append(Entity(**kwargs))
 
@@ -92,12 +96,12 @@ class Map:
                                 tiles.append(tile)
                                 tile_map_populated = True
                             else:
-                                self.entities.append(self.entity_spawn(
+                                self.entity_spawn(
                                     id = tile_res.id,
                                     image = tile_res.image,
                                     x_pos = offset_x+x,
                                     y_pos = offset_y+y
-                                ))
+                                )
                         x += tile_w
                         this_cols += 1
                 if this_cols > cols: cols = this_cols

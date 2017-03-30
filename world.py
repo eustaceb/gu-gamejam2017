@@ -5,6 +5,7 @@ import pygame, csv
 from Resource import *
 from TileMap import *
 from Map import *
+from game_objects.Villager import Villager
 
 
 class World:
@@ -18,7 +19,9 @@ class World:
             print(x)
 
         player_sprite = pygame.image.load("assets/ufo.png")
+        beam_sprite = pygame.image.load("assets/alien_beam.png")
         self.player = self.map.player
+        self.entities.append(Villager(self.player.rect.x, self.player.rect.y))
 
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
     

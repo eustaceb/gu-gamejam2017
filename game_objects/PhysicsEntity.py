@@ -97,6 +97,8 @@ class PhysicsEntity(Entity):
                     if collision.bottom(newrect, tile.rect):  # Moving up; Hit the bottom side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
+                        self.falling = False
+                        self.jumping = False
 
                         if self.rect.top < tile.rect.bottom:
                             self.rect.top = tile.rect.bottom
