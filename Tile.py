@@ -34,6 +34,6 @@ class Tile:
     def __str__(self):
         return"(%d %d %d %d)"%(self.x, self.y, self.width, self.height)
 
-    def render(self, screen):
-        pos = (self.x*self.width, self.y*self.height)
+    def render(self, screen, camera):
+        pos = (self.x*self.width - camera.x, self.y*self.height - camera.y)
         screen.blit(self.get_image(), pos)

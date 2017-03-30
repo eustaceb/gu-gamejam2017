@@ -14,6 +14,7 @@ class TileMap:
         self.filename = filename
         if filename: 
             self.load(filename)
+        self.collision_mask = pygame.Rect(0,0,0,0).unionall([pygame.Rect(s,(tile_w,tile_h) ) for s in self.data])
 
     def load(self, filename):
         with open(filename, 'r') as f:
@@ -54,6 +55,6 @@ class TileMap:
             self.current += 1
             return self.data[( self.current % self.rows, self.cols / self.rows) ]
 
-    def render(self, screen):
+    def render(self, screen, camera):
         for t in self.data.values():
-            t.render(screen)
+            t.render(screen,camera)

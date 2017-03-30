@@ -14,6 +14,7 @@ class Entity(Sprite):
     x_velocity = 0
     y_velocity = 0
 
+
     # Accelerations for simulating jerk wew
     x_acceleration = 0
     y_acceleration = 0
@@ -34,6 +35,7 @@ class Entity(Sprite):
 
     def __init__(self, rect=None, image=None, x_velocity=0, y_velocity=0, gravity=1, falling=False,
                  jumping=False, solid=True, visible=True):
+        print(image)
         super(Entity, self).__init__()
 
         self.rect = rect
@@ -66,9 +68,9 @@ class Entity(Sprite):
         self.rect.x += self.x_velocity
         self.rect.y += self.y_velocity
 
-    def render(self, screen):
+    def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:
-            screen.blit(self.image, (self.rect.x, self.rect.y))
+            screen.blit(self.image, (self.rect.x-camera.x, self.rect.y-camera.y))
 
     def move_up(self):
         self.y_acceleration = -self.base_acceleration
