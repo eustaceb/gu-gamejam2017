@@ -14,9 +14,6 @@ class Player(Entity):
     def __init__(self, **kwargs):
         super(Player, self).__init__(**kwargs)
 
-    def __init__(self):
-        super(Player, self).__init__()
-
     def update(self):
 
         key = pygame.key.get_pressed()
