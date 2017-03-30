@@ -16,7 +16,7 @@ class World:
         self.map.load_map(filename="map2.txt", resources=self.resources)
 
         player_sprite = pygame.image.load("assets/ufo.png")
-        self.player = Player(rect=pygame.Rect(400,300,128,128), image=player_sprite)
+        self.player = self.map.player
 
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
     
