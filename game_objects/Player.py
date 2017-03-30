@@ -15,29 +15,20 @@ class Player(Entity):
         super(Player, self).__init__(**kwargs)
 
     def update(self):
+        self.slow()
 
         key = pygame.key.get_pressed()
 
-        if key[self.key_up] or key[self.key_down] or key[self.key_left] or key[self.key_right]:
-            if key[self.key_up]:
-                if not key[self.key_down]:
-                    self.move_up()
-            elif key[self.key_down]:
-                self.move_down()
+        if key[self.key_up]:
+            if not key[self.key_down]:
+                self.move_up()
+        elif key[self.key_down]:
+            self.move_down()
 
-            if key[self.key_left]:
-                if not key[self.key_right]:
-                    self.move_left()
-            elif key[self.key_right]:
-                self.move_right()
-        else:
-            self.slow()
-
-        velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
-
-        if velocity > self.max_velocity:
-            direction = math.atan2(self.y_velocity, self.x_velocity)
-            self.y_velocity = math.sin(direction)*self.max_velocity
-            self.x_velocity = math.cos(direction)*self.max_velocity
+        if key[self.key_left]:
+            if not key[self.key_right]:
+                self.move_left()
+        elif key[self.key_right]:
+            self.move_right()
 
         super(Player, self).update()
