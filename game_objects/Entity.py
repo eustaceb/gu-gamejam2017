@@ -66,7 +66,9 @@ class Entity(Sprite):
             self.x_velocity = math.cos(direction)*self.max_velocity
 
         if tilemap:
-            collisions = spritecollide(self, tilemap, False)
+            collisions = []
+            for x in tilemap:
+                collisions += spritecollide(self, x, False) 
 
             if(collisions):
                 for tile in collisions:
