@@ -68,11 +68,13 @@ class Entity(Sprite):
         self.rect.y += self.y_velocity
 
         if tilemap:
-            print(self.rect)
-            if self.rect.collidedict(tilemap.collision_mask):
-                print("collision")
+            collision_object = self.rect.collidedict(tilemap.collision_mask)
+            if collision_object:
+                print(collision_object)
                 self.rect.x -= self.x_velocity
                 self.rect.y -= self.y_velocity
+                self.x_velocity *= -1
+                self.y_velocity *= -1
 
     def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:

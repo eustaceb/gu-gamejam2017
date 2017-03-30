@@ -6,6 +6,7 @@ class Tile:
         self.width = width
         self.height = height
         self.resource = res
+         
 
     def get_pos(self):
         return self.x, self.y
@@ -21,9 +22,11 @@ class Tile:
 
     def get_width(self):
         return self.width
-
+    
     def get_height(self):
         return self.height
+
+    
 
     def get_resource(self):
         return self.resource
