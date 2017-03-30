@@ -1,15 +1,30 @@
-@offset 0 800
-@repeat_h 20
+//Left hand side invisible wall
+@offset 0 0
+@repeat_v 5
+i
+
+//Ceiling invisible wall
+@offset 64 0
+@repeat_h 200
+i
+
+//Right hand side invisible wall
+@offset 12928 0
+@repeat_v 5
+i
+
+//Ground
+@offset 0 384
+@repeat_h 202
 0
 
-
-@offset 80 300
+@offset 100 200
 p
 
-@offset 500 750
+@offset 500 340
 t
 
-@offset 700 750
+@offset 700 339
 h
 
 @collide off
