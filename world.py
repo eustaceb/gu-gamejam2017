@@ -24,9 +24,12 @@ class World:
     
     def render(self, screen):
         screen.fill((0,0,0))
-
+        
+        if "bg" in self.tilemaps:
+            self.tilemaps["bg"].render(screen)
         # Moved from self.map.render
-        for tilemap in self.tilemaps.itervalues():
+        for k,tilemap in self.tilemaps.iteritems():
+            if k=="bg":continue
             tilemap.render(screen, self.camera)
 
         for ent in self.entities:
