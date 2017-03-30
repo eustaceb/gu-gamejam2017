@@ -1,6 +1,8 @@
 import random
 
+import pygame
 from enum import Enum
+from pygame.sprite import Group
 
 from .PhysicsEntity import PhysicsEntity
 
@@ -15,14 +17,22 @@ class Direction(Enum):
 class NPC(PhysicsEntity):
 
     direction = Direction.LEFT
+    player = None
+
+    def __init__(self, rect, image, player=None, **kwargs):
+        self.player = player
+        self.tractor = Group(player.tractor_beam)
+        super(NPC, self).__init__(rect, image, **kwargs)
 
     def update(self):
         if self.direction == Direction.LEFT:
-            self.move_left()
+            pass
+            #self.move_left()
         elif self.direction == Direction.RIGHT:
-            self.move_right()
+            pass
+            #self.move_right()
         else:
-            self.stop()
+            self.slow()
 
         switch_direction = random.randint(0,1000)
         if switch_direction == 0:
@@ -37,3 +47,17 @@ class NPC(PhysicsEntity):
             falling = True
 
         super(NPC, self).update()
+
+    def handle_collisions(self, tilemap):
+        super(NPC, self).handle_collisions(tilemap)
+
+        tractors = pygame.sprite.spritecollide(self, self.tractor, False)
+
+        for tractor in tractors:
+            print(tractor)
+            if tractor.enabled:
+                print("WEWE")
+                self.player.score += 10
+                print(self.player.score)
+                self.kill()
+                self = None

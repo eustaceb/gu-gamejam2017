@@ -7,6 +7,8 @@ from TileMap import *
 from Map import *
 from collections import deque
 
+from game_objects.Villager import Villager
+
 
 class World:
     def __init__(self, screen, resources):
@@ -17,6 +19,7 @@ class World:
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)
+        self.entities.append(Villager(self.player.rect.x, self.player.rect.y, player=self.player))
 
         # Set player and world for turrets
         for i in range(len(self.entities)):

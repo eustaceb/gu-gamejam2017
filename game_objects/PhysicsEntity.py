@@ -52,8 +52,6 @@ class PhysicsEntity(Entity):
         self.x_velocity += self.x_acceleration
         self.y_velocity += self.y_acceleration
 
-        print(self.x_velocity)
-        print(self.x_acceleration)
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
         if velocity > self.max_velocity:

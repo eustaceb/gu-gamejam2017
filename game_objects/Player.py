@@ -8,6 +8,7 @@ import pygame
 class Player(PhysicsEntity):
 
     tractor_beam = None
+    score = 0
 
     rotation_angle = 0
     max_rotation = 15
