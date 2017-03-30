@@ -33,8 +33,6 @@ class World:
             elif isinstance(self.entities[i], House):
                 self.entities[i].set_images(house_images)
 
-        player_sprite = pygame.image.load("assets/ufo.png")
-
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
         self.bg_surface = pygame.Surface(screen.get_size())
     
@@ -51,6 +49,8 @@ class World:
 
         for ent in self.entities:
             ent.render(screen, self.camera)
+        for bomb in self.player.bombs:
+            bomb.render(screen, self.camera)
         for bul in self.bullets:
             bul.render(screen, self.camera)
         self.player.render(screen, self.camera)
@@ -61,18 +61,23 @@ class World:
         screen.blit(score_text, (0, 50))
 
     def update(self, time_now):
-        self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities, bullets=self.bullets)
+        self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
+                           bullets=self.bullets, current_tick=time_now)
         for ent in self.entities:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now)
 
         for bul in self.bullets:
             bul.update()
+        for bomb in self.player.bombs:
+            bomb.update()
         self.camera.center = self.player.rect.center
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]
             if frst.gone(time_now):
                 self.bullets.remove(frst)
+
+
 
     def process_event(self, event):
         if event.type == pygame.KEYDOWN:
