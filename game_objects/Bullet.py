@@ -1,10 +1,12 @@
-from .Entity import Entity
-from pygame import Rect
+from .PhysicsEntity import PhysicsEntity
+from pygame import Rect, Surface
 import math
 
 
-class Bullet(Entity):
-    def __init__(self, bullet_image, origin_pos, target_pos, lifetime, base_velocity=5, **kwargs):
+class Bullet(PhysicsEntity):
+    def __init__(self, origin_pos, target_pos, lifetime, bullet_image=None, base_velocity=5, **kwargs):
+        bullet_image = Surface(5, 10)
+        bullet_image.fill((255, 200, 0))
         rect = Rect(origin_pos, bullet_image.get_size())
         self.lifetime = lifetime
         self.counter = 0
