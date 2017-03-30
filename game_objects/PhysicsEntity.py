@@ -71,7 +71,8 @@ class PhysicsEntity(Entity):
             collisions = []
 
             for x in tilemap:
-                collisions += spritecollide(self, x, False)
+                if x.collides:
+                    collisions += spritecollide(self, x, False)
 
             self.blocked_top = False
             self.blocked_bottom = False

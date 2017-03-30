@@ -14,6 +14,8 @@ class World:
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.map.load_map(filename="map2.txt", resources=self.resources)
+        for x in self.map.tilemaps.itervalues():
+            print(x)
 
         player_sprite = pygame.image.load("assets/ufo.png")
         self.player = self.map.player
