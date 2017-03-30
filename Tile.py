@@ -30,6 +30,8 @@ class Tile:
 
     def get_image(self):
         return self.resource.get_image()
+    def get_rect(self):
+        return (self.x, self.y, self.width, self.height)
     
     def __str__(self):
         return"(%d %d %d %d)"%(self.x, self.y, self.width, self.height)

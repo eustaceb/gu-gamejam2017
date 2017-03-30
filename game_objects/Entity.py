@@ -41,12 +41,19 @@ class Entity(Sprite):
         self.solid = solid
         self.visible = visible
 
-    def update(self):
+    def update(self, tilemap=None, entities=None ):
         if self.falling and (self.gravity != 0 and self.gravity is not None):
             self.yvel += self.gravity
 
         self.rect.x += self.x_velocity
         self.rect.y += self.y_velocity
+
+        if tilemap:
+            print(self.rect)
+            if self.rect.collidedict(tilemap.collision_mask):
+                print("collision")
+                self.rect.x -= self.x_velocity
+                self.rect.y -= self.y_velocity
 
     def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:

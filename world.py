@@ -27,7 +27,7 @@ class World:
         pygame.display.flip()
 
     def update(self):
-        self.player.update()
+        self.player.update(self.tilemap, self.entities)
         for ent in self.entities:
             ent.update()
         self.camera.center = self.player.rect.center

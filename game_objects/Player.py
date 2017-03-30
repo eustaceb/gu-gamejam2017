@@ -14,7 +14,7 @@ class Player(Entity):
     def __init__(self, **kwargs):
         super(Player, self).__init__(**kwargs)
 
-    def update(self):
+    def update(self, tilemap, entities):
 
         key = pygame.key.get_pressed()
         if key[self.key_up] or key[self.key_down] or key[self.key_left] or key[self.key_right]:
@@ -39,4 +39,4 @@ class Player(Entity):
             self.y_velocity = math.sin(direction)*self.max_velocity
             self.x_velocity = math.cos(direction)*self.max_velocity
 
-        super(Player, self).update()
+        super(Player, self).update(tilemap, entities)
