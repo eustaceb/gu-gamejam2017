@@ -6,7 +6,7 @@ from Tile import *
 from game_objects.Entity import *
 from game_objects.Player import *
 from game_objects.Turret import *
-
+from game_objects.House import *
 
 class Map:
     def __init__(self):
@@ -20,6 +20,8 @@ class Map:
         if resource.type == "turret":
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, 64, 64)
             return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
+        elif resource.type == "house":
+            return House(image=resource.image, player=self.player, **kwargs)
         else:
             return Entity(image=resource.image, **kwargs)
 
@@ -116,7 +118,7 @@ class Map:
                     tile_ids = [x.strip() for x in line_strip.split(",")] * tile_repeat 
                     tile_repeat=1
                     row_len = len(tile_ids)
-                    print("row ",row_len)
+                    #print("row ",row_len)
                     tile_ids *= row_repeat
                     row_repeat = 1
                     x = 0
@@ -161,7 +163,7 @@ class Map:
                     tile_map.cols = cols
                     tile_map.collides = collides
                     self.tilemaps[layer] = tile_map
-                    print(layer)
+                    #print(layer)
 
         self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x:x[0], reverse=True))
 

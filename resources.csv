@@ -2,6 +2,12 @@ id,name,filename,type
 p, player, ./assets/ufo.png, player
 0, test, ./assets/new_grass.png, tile
 t, pink_turret, ./assets/pink_cannon.png, turret
+h , test, ./assets/house_windows.png, house
+h1 , test, ./assets/house_windows_damaged_1.png, house
+h2 , test, ./assets/house_windows_damaged_2.png, house
+h3 , test, ./assets/house_windows_damaged_3.png, house
+h4 , test, ./assets/house_windows_damaged_4.png, house
+h5 , test, ./assets/house_windows_damaged_final.png, house
 4  , test, ./assets/starry_night_moon.png, tile
 5  , test, ./assets/block_guy_brown_green.png, tile
 6  , test, ./assets/girl_walk.png, tile
@@ -11,23 +17,17 @@ t, pink_turret, ./assets/pink_cannon.png, turret
 10 , test, ./assets/block_guy_white_green.png, tile
 11 , test, ./assets/pepper_grass.png, tile
 12 , test, ./assets/block_guy_yellow_blue.png, tile
-13 , test, ./assets/house_windows_damaged_final.png, tile
 14 , test, ./assets/block_guy_white_blue.png, tile
 15 , test, ./assets/simple_house.png, tile
 16 , test, ./assets/block_guy_brown_blue.png, tile
 17 , test, ./assets/block_guy_white_red.png, tile
 19 , test, ./assets/yellow_laser.png, tile
-20 , test, ./assets/house_windows_damaged_3.png, tile
 21 , test, ./assets/block_guy_yellow_red.png, tile
 22 , test, ./assets/block_guy_yellow_pink.png, tile
-23 , test, ./assets/house_windows.png, tile
 24 , test, ./assets/block_guy_white_pink.png, tile
-25 , test, ./assets/house_windows_damaged_1.png, tile
 26 , test, ./assets/block_guy_brown_pink.png, tile
 27 , test, ./assets/starry_night.png, tile
 28 , test, ./assets/green_laser.png, tile
 29 , test, ./assets/red_laser.png, tile
-30 , test, ./assets/house_windows_damaged_4.png, tile
 31 , test, ./assets/girl_walk_stand.png, tile
-32 , test, ./assets/house_windows_damaged_2.png, tile
 x , block, ./assets/block.png , tile
