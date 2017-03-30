@@ -13,7 +13,7 @@ class PhysicsEntity(Entity):
     x_acceleration = 0
     y_acceleration = 0
 
-    base_acceleration = 1
+    base_acceleration = 0.3
     base_friction = 0.1
 
     max_velocity = 10
@@ -38,6 +38,9 @@ class PhysicsEntity(Entity):
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
 
+        self.x_acceleration = 0
+        self.y_acceleration = 0
+
         self.gravity = gravity
         self.jumping = jumping
         self.falling = falling
@@ -49,6 +52,8 @@ class PhysicsEntity(Entity):
         self.x_velocity += self.x_acceleration
         self.y_velocity += self.y_acceleration
 
+        print(self.x_velocity)
+        print(self.x_acceleration)
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
         if velocity > self.max_velocity:
@@ -87,8 +92,6 @@ class PhysicsEntity(Entity):
                         self.y_velocity = 0
                         self.y_acceleration = 0
 
-                        print("top")
-
                         if self.rect.bottom > tile.rect.top:
                             self.rect.bottom = tile.rect.top
 
@@ -103,15 +106,11 @@ class PhysicsEntity(Entity):
                         if self.rect.top < tile.rect.bottom:
                             self.rect.top = tile.rect.bottom
 
-                        print("bottom")
-
                         self.blocked_top = True
 
                     if collision.left(newrect, tile.rect):  # Moving right; Hit the left side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
-
-                        print("left")
 
                         if self.rect.right > tile.rect.left:
                             self.rect.right = tile.rect.left
@@ -121,8 +120,6 @@ class PhysicsEntity(Entity):
                     if collision.right(newrect, tile.rect):  # Moving left; Hit the right side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
-
-                        print("right")
 
                         if self.rect.left < tile.rect.right:
                             self.rect.left = tile.rect.right
@@ -142,16 +139,24 @@ class PhysicsEntity(Entity):
         self.x_acceleration = self.base_acceleration
 
     def slow(self):
-        if(self.y_velocity > self.base_friction):
+        self.slowX()
+        self.slowY()
+
+    def slowY(self):
+        if self.y_velocity > self.base_friction:
             self.y_acceleration = - self.base_friction
-        elif(self.y_velocity < -self.base_friction):
+        elif self.y_velocity < -self.base_friction:
             self.y_acceleration = self.base_friction
         else:
             self.y_acceleration = 0
+            self.y_velocity = 0
 
-        if (self.x_velocity > self.base_friction):
+    def slowX(self):
+        if self.x_velocity > self.base_friction:
             self.x_acceleration = - self.base_friction
-        elif (self.x_velocity < self.base_friction):
+        elif self.x_velocity < -self.base_friction:
             self.x_acceleration = self.base_friction
         else:
             self.x_acceleration = 0
+            self.x_velocity = 0
+

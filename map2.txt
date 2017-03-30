@@ -5,16 +5,11 @@
 @offset 0 400
 p
 
-
-
-
-
 @collide off
 @bg
 @offset 0 0
 @tile_grid 20 15 
 27 
-
 
 
 

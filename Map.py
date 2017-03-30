@@ -134,12 +134,10 @@ class Map:
                                 tiles.append(tile)
                                 tile_map_populated = True
                             elif tile_res.type == "player":
-                                print "playa"
                                 rect = pygame.Rect(offset_x + x, offset_y + y, tile_res.image.get_width(),
                                                    tile_res.image.get_height())
                                 self.player = Player(image=tile_res.image, rect=rect)
                             else:
-                                print "WOAH"
                                 self.entities.append(self.entity_spawn(
                                     resource=tile_res,
                                     x_pos=offset_x + x,
@@ -164,10 +162,6 @@ class Map:
                     tile_map.collides = collides
                     self.tilemaps[layer] = tile_map
                     print(layer)
-        # Set player for turrets
-        for i in range(len(self.entities)):
-            if isinstance(self.entities[i], Turret):
-                self.entities[i].set_player(self.player)
 
         self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x:x[0], reverse=True))
 

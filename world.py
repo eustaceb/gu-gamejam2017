@@ -10,13 +10,20 @@ from collections import deque
 
 class World:
     def __init__(self, screen, resources):
+        self.font = pygame.font.SysFont("Verdana", 25)
         self.tilemaps = {}
         self.entities = []
-        self.bullets = deque()
+        self.bullets = pygame.sprite.Group()
         self.resources = resources
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)
+
+        # Set player and world for turrets
+        for i in range(len(self.entities)):
+            if isinstance(self.entities[i], Turret):
+                self.entities[i].set_player(self.player)
+                self.entities[i].set_world(self)
 
         player_sprite = pygame.image.load("assets/ufo.png")
 
@@ -25,7 +32,7 @@ class World:
     
     def render(self, screen):
         screen.fill((0,0,0))
-        print(self.tilemaps.keys()) 
+        #print(self.tilemaps.keys())
         if "bg" in self.tilemaps:
             self.tilemaps["bg"].draw(self.bg_surface)
         screen.blit(self.bg_surface, screen.get_rect())
@@ -36,13 +43,25 @@ class World:
 
         for ent in self.entities:
             ent.render(screen, self.camera)
+        for bul in self.bullets:
+            bul.render(screen, self.camera)
         self.player.render(screen, self.camera)
 
+        health_text = self.font.render("Health: " + str(self.player.health), 1, (255, 0, 0))
+        screen.blit(health_text, (0, 0))
+
     def update(self):
-        self.player.update(self.map.tilemaps.itervalues(), self.entities)
+        self.player.update(self.map.tilemaps.itervalues(), self.entities, self.bullets)
         for ent in self.entities:
             ent.update()
+        for bul in self.bullets:
+            bul.update()
         self.camera.center = self.player.rect.center
+
+        if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
+            frst = self.bullets.sprites()[0]
+            if frst.gone():
+                self.bullets.remove(frst)
 
     def process_event(self, event):
         if event.type == pygame.KEYDOWN:
