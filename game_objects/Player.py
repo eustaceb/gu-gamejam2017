@@ -1,10 +1,8 @@
-from .Entity import Entity
-
+from .PhysicsEntity import PhysicsEntity
 import pygame
-import math
 
 # Wow its a playar
-class Player(Entity):
+class Player(PhysicsEntity):
 
     key_up = pygame.K_w
     key_down = pygame.K_s
@@ -16,6 +14,7 @@ class Player(Entity):
 
     def update(self, tilemap, entities):
 
+        self.slow()
         key = pygame.key.get_pressed()
 
         if key[self.key_up]:
