@@ -1,36 +1,15 @@
 import random
 
-from enum import Enum
+import pygame
+from pygame.rect import Rect
 
-from .PhysicsEntity import PhysicsEntity
-
-
-# A villager that lives in the village
-class Villager(PhysicsEntity):
-
-    direction = Direction.LEFT
-
-    def update(self):
-        if self.direction == Direction.LEFT:
-            self.move_left()
-        elif self.direction == Direction.RIGHT:
-            self.move_right()
-        else:
-            self.stop()
-
-        switch_direction = random.randint(0,1000)
-        if switch_direction == 0:
-            if self.direction == Direction.LEFT:
-                self.direction = Direction.RIGHT
-            else:
-                self.direction = Direction.LEFT
-        elif switch_direction == 1000:
-            self.direction = Direction.STATIONARY
-
-        super(Villager, self).update()
+from game_objects.NPC import NPC
 
 
-class Direction(Enum):
-    LEFT = 0
-    RIGHT = 1
-    STATIONARY = 2
+class Villager(NPC):
+
+    def __init__(self, x, y):
+        races = ["white", "brown", "yellow"]
+        colours = ["blue", "green", "pink", "red"]
+        image = pygame.image.load("assets/block_guy_"+random.choice(races)+"_"+random.choice(colours)+".png")
+        super(Villager, self).__init__(image=image, rect=Rect(x,y,4,8))
