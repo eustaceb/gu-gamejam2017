@@ -47,9 +47,9 @@ class Entity(Sprite):
         self.rect.x += self.x_velocity
         self.rect.y += self.y_velocity
 
-    def render(self, screen):
+    def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:
-            screen.blit(self.image, (self.rect.x, self.rect.y))
+            screen.blit(self.image, (self.rect.x-self.camera.x, self.rect.y-self.camera.y))
 
     def move_up(self):
         self.y_velocity -= self.base_acceleration

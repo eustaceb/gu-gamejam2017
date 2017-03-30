@@ -11,24 +11,26 @@ class World:
         self.entities = []
         self.resources = resources
         self.tilemap = TileMap("map1.csv", self.resources)
-        print(len(self.tilemap.data))
-        ball_sprite = pygame.image.load("test.gif")
-        ball = Player(rect=pygame.Rect(400,300,64,64), image=ball_sprite)
-        self.entities.append(ball)
+
+        player_sprite = pygame.image.load("assets/ufo.png")
+        self.player = Player(rect=pygame.Rect(400,300,128,128), image=player_sprite)
+
+        self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
     
     def render(self, screen):
         screen.fill((0,0,0))
 
-        self.tilemap.render(screen)
+        self.tilemap.render(screen,self.camera)
         for ent in self.entities:
-            ent.render(screen)
+            ent.render(screen, camera)
         #screen.blit(self.tilemap.data[0][0].get_image(), (300,400))
         pygame.display.flip()
 
     def update(self):
+        self.player.update()
         for ent in self.entities:
             ent.update()
-
+        self.camera.center = self.player.rect.center
     def process_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:

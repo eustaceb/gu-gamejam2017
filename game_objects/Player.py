@@ -31,7 +31,6 @@ class Player(Entity):
                 self.move_right()
         else:
             self.slow()
->>>>>>> d369a2a5244fdccd342eb9fee4a37a3563848f94
 
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
