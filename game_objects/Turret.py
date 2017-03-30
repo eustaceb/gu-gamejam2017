@@ -2,20 +2,24 @@ import pygame
 import random
 import math
 from .Bullet import Bullet
+from .Entity import Entity
 from collections import deque
+import pygame
 
-
-class Turret(pygame.sprite.Sprite):
-    def __init__(self, rect, bullet_image, player, shoot_interval=1000, range=500, bullet_lifetime=5000):
-        self.player = player
+class Turret(Entity):
+    def __init__(self, rect, image, player=None, bullet_image=None,
+                 shoot_interval=1000, range=500, bullet_lifetime=5000, **kwargs):
         self.bullet_image = bullet_image
-        self.rect = rect
         self.shoot_interval = shoot_interval  # in milliseconds
         self.counter = 0
+        self.player = player
         self.range = range
         self.shots = deque()
         self.bullet_lifetime = bullet_lifetime
-        super(Turret, self).__init__()
+        super(Turret, self).__init__(rect=rect, image=image, **kwargs)
+
+    def set_player(self, player):
+        self.player = player
 
     def update(self):
         player_pos = (self.player.rect.center[0], self.player.rect.center[1])

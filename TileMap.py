@@ -45,6 +45,7 @@ class TileMap(Group):
         return self.rows, self.cols
 
     def render(self, screen, camera):
+
         for sprite in self:
             screen.blit(sprite.image, (sprite.rect.x-camera.x, sprite.rect.y-camera.y))
 
