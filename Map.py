@@ -38,6 +38,7 @@ class Map:
             offset_x, offset_y = 0,0
             tile_repeat = 1
             row_repeat = 1
+            background = False
             for line in f.readlines():
                 line_strip = line.strip()
                 if len(line_strip) == 0:
@@ -47,6 +48,7 @@ class Map:
                         tile_map.rows = rows
                         tile_map.cols = cols
                         tile_map.collides = collides
+                        tile_map.background = background
                         self.tilemaps[layer] = tile_map
                         if type(layer) is int:
                             layer += 1
@@ -60,6 +62,7 @@ class Map:
                         collides = True
                         tile_repeat = 1
                         row_repeat = 1
+                        background = False
                     else:
                         continue
                 elif (line_strip[0] == "/"):
@@ -104,6 +107,9 @@ class Map:
                             if tokens[1].isalnum() and tokens[2].isalnum():
                                 tile_repeat = int(tokens[1])
                                 row_repeat = int(tokens[2])
+                    elif tokens[0] == "@background":
+                        layer="bg"
+
 
 
 
