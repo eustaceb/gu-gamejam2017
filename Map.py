@@ -45,7 +45,10 @@ class Map:
                         tile_map.cols = cols
                         tile_map.collides = collides
                         self.tilemaps[layer] = tile_map
-                        layer += 1
+                        if type(layer) is int:
+                            layer += 1
+                        else:
+                            layer += "1"
                         tile_map_populated = False
                         tiles = []
                         rows, cols = 0, 0
@@ -70,6 +73,12 @@ class Map:
                                 collides = False
                             else:
                                 collides = True
+                    elif tokens[0] == "@layer":
+                        if len(tokens) >= 2:
+                            if tokens[0].isalnum():
+                                layer = int(tokens[0])
+                            else:
+                                layer = tokens[0]
 
                 else:
                     tile_ids = [x.strip() for x in line_strip.split(",")]
@@ -105,13 +114,10 @@ class Map:
                 if this_cols > cols: cols = this_cols
                 y += tile_h
                 rows += 1
-                self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x: x[0]))
 
                 if tile_map_populated:
                     tile_map = TileMap(res=resources, tile_h=tile_h, tile_w=tile_w)
-                    print(tiles)
                     tile_map.add(tiles)
-                    print(tile_map)
                     tile_map.rows = rows
                     tile_map.cols = cols
                     tile_map.collides = collides
@@ -120,5 +126,7 @@ class Map:
         for i in range(len(self.entities)):
             if isinstance(self.entities[i], Turret):
                 self.entities[i].set_player(self.player)
+
+        self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x:x[0], reverse=True))
 
         return self.player, self.tilemaps, self.entities
