@@ -1,5 +1,7 @@
 import pygame
 import sys
+import os
+
 from world import *
 
 
@@ -14,6 +16,13 @@ def load_resources(filename):
             resources[res_id] = Resource(res_id, name, filename, type)
     return resources
 
+def load_all_resources():
+    resources = {}
+    files = ["./assets/" + f for f in os.listdir("./assets") if f.endswith(".png") or f.endswith(".jpg") or f.endswith("gif") ]
+    print(files)
+    for i,v in enumerate(files):
+        resources[str(i)] = Resource(str(i), v.lstrip("./assets")[:v.index(".")],v,"idk")
+    return resources
 
 def main():
     pygame.init()
@@ -23,7 +32,7 @@ def main():
         width, height = sys.argv[1], sys.argv[2]
 
     screen = pygame.display.set_mode((width,height))
-    resources = load_resources("resources.csv")
+    resources = load_all_resources()
     game_world = World(screen, resources)
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()
