@@ -34,15 +34,3 @@ class Player(Entity):
             self.x_velocity = math.cos(direction)*self.max_velocity
 
         super(Player, self).update()
-
-    def move_up(self):
-        self.yvelocity -= self.base_acceleration
-
-    def move_down(self):
-        self.yvelocity += self.base_acceleration
-
-    def move_left(self):
-        self.xvelocity -= self.base_acceleration
-
-    def move_right(self):
-        self.xvelocity += self.base_acceleration
