@@ -44,9 +44,12 @@ class TileMap(Group):
     def get_dimensions(self):
         return self.rows, self.cols
 
-    def render(self, screen, camera):
+    def render(self, screen, camera=None):
         for sprite in self:
-            screen.blit(sprite.image, (sprite.rect.x-camera.x, sprite.rect.y-camera.y))
+            if camera:
+                screen.blit(sprite.image, (sprite.rect.x-camera.x, sprite.rect.y-camera.y))
+            else:
+                screen.blit(sprite.image, (sprite.rect.x, sprite.rect.y))
 
     def __str__(self):
         return "%s, collides: %s"%(str(super(TileMap, self)), self.collides)

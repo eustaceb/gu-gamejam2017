@@ -8,7 +8,7 @@
 0,0,0,0,0,0,0,0,#,0,0,0,0,0,0,0,0
 
 @collide off
-@layer -1
+@bg
 @offset 0 0
 @tile_grid 200 200
 x
