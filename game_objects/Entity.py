@@ -1,5 +1,5 @@
 import math
-from pygame.sprite import Sprite
+from pygame.sprite import Sprite, spritecollide
 
 
 #This class represents every entity in the game
@@ -64,15 +64,27 @@ class Entity(Sprite):
             self.y_velocity = math.sin(direction)*self.max_velocity
             self.x_velocity = math.cos(direction)*self.max_velocity
 
+        if tilemap:
+            collisions = spritecollide(self, tilemap, False)
+
+            if(collisions):
+                for tile in collisions:
+                    print("collision")
+                    if self.x_velocity > 0:  # Moving right; Hit the left side of the wall
+                        self.x_velocity = 0
+                        self.x_acceleration = 0
+                    elif self.x_velocity < 0:  # Moving left; Hit the right side of the wall
+                        self.x_velocity = 0
+                        self.x_acceleration = 0
+                    if self.y_velocity > 0:  # Moving down; Hit the top side of the wall
+                        self.y_velocity = 0
+                        self.y_acceleration = 0
+                    if self.y_velocity < 0:  # Moving up; Hit the bottom side of the wall
+                        self.y_velocity = 0
+                        self.y_acceleration = 0
+
         self.rect.x += self.x_velocity
         self.rect.y += self.y_velocity
-
-        if tilemap:
-            print(self.rect)
-            if self.rect.collidedict(tilemap.collision_mask):
-                print("collision")
-                self.rect.x -= self.x_velocity
-                self.rect.y -= self.y_velocity
 
     def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:
