@@ -21,12 +21,14 @@ class World:
         player_sprite = pygame.image.load("assets/ufo.png")
 
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
+        self.bg_surface = pygame.Surface(screen.get_size())
     
     def render(self, screen):
         screen.fill((0,0,0))
-        
+        print(self.tilemaps.keys()) 
         if "bg" in self.tilemaps:
-            self.tilemaps["bg"].render(screen)
+            self.tilemaps["bg"].draw(self.bg_surface)
+        screen.blit(self.bg_surface, screen.get_rect())
         # Moved from self.map.render
         for k,tilemap in self.tilemaps.iteritems():
             if k=="bg":continue

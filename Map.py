@@ -107,9 +107,9 @@ class Map:
                             if tokens[1].isalnum() and tokens[2].isalnum():
                                 tile_repeat = int(tokens[1])
                                 row_repeat = int(tokens[2])
-                    elif tokens[0] == "@background":
+                    elif tokens[0] == "@bg":
                         layer="bg"
-
+                    continue
 
 
 
@@ -158,6 +158,7 @@ class Map:
                     tile_map.cols = cols
                     tile_map.collides = collides
                     self.tilemaps[layer] = tile_map
+                    print(layer)
         # Set player for turrets
         for i in range(len(self.entities)):
             if isinstance(self.entities[i], Turret):
