@@ -18,9 +18,7 @@ class Player(Entity):
 
         key = pygame.key.get_pressed()
 
-        if key[self.key_up] and key[self.key_down] and key[self.key_left] and key[self.key_right]:
-            self.slow()
-        else:
+        if key[self.key_up] or key[self.key_down] or key[self.key_left] or key[self.key_right]:
             if key[self.key_up]:
                 if not key[self.key_down]:
                     self.move_up()
@@ -32,6 +30,8 @@ class Player(Entity):
                     self.move_left()
             elif key[self.key_right]:
                 self.move_right()
+        else:
+            self.slow()
 
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
