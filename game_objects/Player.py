@@ -7,6 +7,7 @@ import pygame
 # Wow its a playar
 class Player(PhysicsEntity):
 
+    health = 5
     tractor_beam = None
     key_up = pygame.K_w
     key_down = pygame.K_s
@@ -18,7 +19,7 @@ class Player(PhysicsEntity):
 
         super(Player, self).__init__(**kwargs)
 
-    def update(self, tilemap, entities):
+    def update(self, tilemap, entities, bullets):
 
         self.slow()
         key = pygame.key.get_pressed()
@@ -36,10 +37,19 @@ class Player(PhysicsEntity):
             self.move_right()
 
         super(Player, self).update(tilemap, entities)
-        self.tractor_beam.update()
 
+        bullet_collisions = pygame.sprite.spritecollide(self, bullets, True)
+        collision_count = len(bullet_collisions)
+        if collision_count > 0:
+            self.damage(collision_count)
+
+        self.tractor_beam.update()
 
     def render(self, screen, camera):
         self.tractor_beam.render(screen, camera)
         super(Player, self).render(screen, camera)
+
+    def damage(self, amount):
+        if self.health > 0:
+            self.health -= amount
 

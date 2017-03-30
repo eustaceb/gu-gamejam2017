@@ -1,6 +1,7 @@
 from .PhysicsEntity import PhysicsEntity
 from pygame import Rect, Surface
 import math
+import pygame
 
 
 class Bullet(PhysicsEntity):
