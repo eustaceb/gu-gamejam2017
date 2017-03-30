@@ -5,14 +5,13 @@ import pygame
 
 
 class Bullet(PhysicsEntity):
-    def __init__(self, origin_pos, target_pos, lifetime, bullet_image=None, base_velocity=5, **kwargs):
+    def __init__(self, origin_pos, target_pos, created_on, lifetime, bullet_image=None, base_velocity=5, **kwargs):
         #if bullet_image is None:
         bullet_image = Surface((5, 10))
         bullet_image.fill((255, 200, 0))
-        print origin_pos, bullet_image.get_size()
         rect = Rect(origin_pos, bullet_image.get_size())
         self.lifetime = lifetime
-        self.counter = 0
+        self.created_on = created_on
         distance = math.hypot(target_pos[0] - origin_pos[0], target_pos[1] - origin_pos[1])
         x_velocity = (target_pos[0] - origin_pos[0]) / distance * base_velocity
         y_velocity = (target_pos[1] - origin_pos[1]) / distance * base_velocity
@@ -20,10 +19,9 @@ class Bullet(PhysicsEntity):
                                      x_velocity=x_velocity, y_velocity=y_velocity, **kwargs)
 
     def update(self, **kwargs):
-        self.counter += 1
         super(Bullet, self).update(**kwargs)
 
-    def gone(self):
-        if self.counter > self.lifetime:
+    def gone(self, tick):
+        if tick - self.created_on > self.lifetime:
             return True
         return False
