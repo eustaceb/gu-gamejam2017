@@ -7,7 +7,7 @@ from Tile import *
 
 
 class TileMap(Group):
-    def __init__(self, filename, res, tile_h = 64, tile_w = 64):
+    def __init__(self, res, tile_h = 64, tile_w = 64, filename=None):
         super(TileMap, self).__init__()
         self.tile_h = tile_h
         self.tile_w = tile_w
