@@ -29,3 +29,4 @@ id,name,filename,type
 30 , test, ./assets/house_windows_damaged_4.png, 30  
 31 , test, ./assets/girl_walk_stand.png, 31  
 32 , test, ./assets/house_windows_damaged_2.png, 32  
+x , block, ./assets/block.png , 32  

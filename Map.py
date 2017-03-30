@@ -32,6 +32,8 @@ class Map:
             collides=True
             layer = 0 
             offset_x, offset_y = 0,0
+            tile_repeat = 1
+            row_repeat = 1
             for line in f.readlines():
                 line_strip = line.strip()
                 if len(line_strip) == 0:
@@ -52,6 +54,8 @@ class Map:
                         tile_w, tile_h = 64,64
                         offset_x, offset_y = 0,0
                         collides = True
+                        tile_repeat = 1
+                        row_repeat = 1
                     else:
                         continue
                 elif (line_strip[0] == "/") :
@@ -60,7 +64,14 @@ class Map:
                     tokens = line_strip.split()
                     if tokens[0] == "@offset":
                         if len(tokens) >= 3:
-                            offset_x, offset_y = int(tokens[1]), int(tokens[2])
+                            if tokens[1].isalnum() and tokens[2].isalnum():
+                                offset_x, offset_y = int(tokens[1]), int(tokens[2])
+                            y = 0
+                    elif tokens[0] == "@pad":
+                        if len(tokens) >= 3:
+                            if tokens[1].isalnum() and tokens[2].isalnum():
+                                offset_x += int(tokens[1])
+                                y += int(tokens[2])
                     elif tokens[0] == "@tile_size":
                         if len(tokens) >= 3:
                             tile_w, tile_h = int(tokens[1]), int(tokens[2])
@@ -72,13 +83,34 @@ class Map:
                                 collides = True
                     elif tokens[0] == "@layer":
                         if len(tokens) >= 2:
-                            if tokens[0].isalnum():
-                                layer = int(tokens[0])
+                            if tokens[1].isalnum():
+                                layer = int(tokens[1])
                             else:
-                                layer = tokens[0]
+                                layer = tokens[1]
+                    elif tokens[0] == "@repeat_h":
+                        if len(tokens) >= 2:
+                            if tokens[1].isalnum():
+                                tile_repeat = int(tokens[1])
+                    elif tokens[0] == "@repeat_v":
+                        if len(tokens) >= 2:
+                            if tokens[1].isalnum():
+                                row_repeat = int(tokens[1])
+                    elif tokens[0] == "@tile_grid":
+                        if len(tokens) >= 3:
+                            if tokens[1].isalnum() and tokens[2].isalnum():
+                                tile_repeat = int(tokens[1])
+                                row_repeat = int(tokens[2])
+
+
 
                 else:
-                    tile_ids = [x.strip() for x in line_strip.split(",")]
+                
+                
+                    tile_ids = [x.strip() for x in line_strip.split(",")] * tile_repeat 
+                    row_len = len(tile_ids)
+                    print("row ",row_len)
+                    tile_ids *= row_repeat
+                        
                     x = 0
                     this_cols = 0
                     for id in tile_ids:
@@ -100,6 +132,11 @@ class Map:
                                 ))
                         x += tile_w
                         this_cols += 1
+                        if this_cols >= row_len:
+                            y +=  tile_w
+                            this_cols = 0
+                            rows += 1
+                            x = 0
                 if this_cols > cols: cols = this_cols
                 y += tile_h        
                 rows += 1
