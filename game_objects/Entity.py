@@ -52,16 +52,16 @@ class Entity(Sprite):
             screen.blit(self.image, (self.rect.x, self.rect.y))
 
     def move_up(self):
-        self.yvelocity -= self.base_acceleration
+        self.y_velocity -= self.base_acceleration
 
     def move_down(self):
-        self.yvelocity += self.base_acceleration
+        self.y_velocity += self.base_acceleration
 
     def move_left(self):
-        self.xvelocity -= self.base_acceleration
+        self.x_velocity -= self.base_acceleration
 
     def move_right(self):
-        self.xvelocity += self.base_acceleration
+        self.x_velocity += self.base_acceleration
 
     def slow(self):
         if self.x_velocity != 0:
