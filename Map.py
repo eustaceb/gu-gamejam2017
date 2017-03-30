@@ -110,17 +110,18 @@ class Map:
                     continue
 
 
-
                 else:
                 
                 
                     tile_ids = [x.strip() for x in line_strip.split(",")] * tile_repeat 
+                    tile_repeat=1
                     row_len = len(tile_ids)
                     print("row ",row_len)
                     tile_ids *= row_repeat
-                        
+                    row_repeat = 1
                     x = 0
                     this_cols = 0
+                    
                     for id in tile_ids:
                         if id.isalnum():
                             tile_res = resources[id]
@@ -152,7 +153,7 @@ class Map:
                             rows += 1
                             x = 0
                 if this_cols > cols: cols = this_cols
-                y += tile_h
+                #y += tile_h
                 rows += 1
 
                 if tile_map_populated:
