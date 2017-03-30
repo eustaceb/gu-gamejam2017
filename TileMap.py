@@ -29,8 +29,8 @@ class TileMap(Group):
                 current_row = []
                 x = 0
                 for col in line:
-                    if not col == "#": 
-                        tile = Tile(Rect(x, y, self.tile_w, self.tile_h), self.resources[col].image)
+                    if not col == "#":
+                        tile = Tile(Rect(x * self.tile_w, y * self.tile_h, self.tile_w, self.tile_h), self.resources[col].image)
                         self.add(tile)
                     x += 1
                     count += 1
