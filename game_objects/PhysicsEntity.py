@@ -45,7 +45,7 @@ class PhysicsEntity(Entity):
         self.jumping = jumping
         self.falling = falling
 
-    def update(self, tilemap=None, entities=None):
+    def update(self, tilemap=None, entities=None, **kwargs):
         if(self.gravity != 0 and self.gravity is not None):
             if self.falling:
                 self.y_velocity += self.gravity

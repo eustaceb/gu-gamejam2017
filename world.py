@@ -53,17 +53,18 @@ class World:
         health_text = self.font.render("Health: " + str(self.player.health), 1, (255, 0, 0))
         screen.blit(health_text, (0, 0))
 
-    def update(self):
-        self.player.update(self.map.tilemaps.itervalues(), self.entities, self.bullets)
+    def update(self, time_now):
+        self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities, bullets=self.bullets)
         for ent in self.entities:
-            ent.update(self.map.tilemaps.itervalues())
+            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now)
+
         for bul in self.bullets:
             bul.update()
         self.camera.center = self.player.rect.center
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]
-            if frst.gone():
+            if frst.gone(time_now):
                 self.bullets.remove(frst)
 
     def process_event(self, event):

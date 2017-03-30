@@ -29,7 +29,7 @@ class Player(PhysicsEntity):
         super(Player, self).__init__(**kwargs)
         self.original_image = self.image
 
-    def update(self, tilemap, entities, bullets):
+    def update(self, tilemap=None, entities=None, bullets=None, **kwargs):
 
         key = pygame.key.get_pressed()
 

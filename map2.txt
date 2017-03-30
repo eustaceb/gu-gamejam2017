@@ -2,8 +2,12 @@
 @repeat_h 20
 0
 
+
 @offset 80 300
 p
+
+@offset 500 750
+t
 
 @collide off
 @bg

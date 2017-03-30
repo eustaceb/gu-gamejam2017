@@ -24,7 +24,7 @@ class NPC(PhysicsEntity):
         self.tractor = Group(player.tractor_beam)
         super(NPC, self).__init__(rect, image, **kwargs)
 
-    def update(self, tilemap=None, entities=None):
+    def update(self, tilemap=None, entities=None, **kwargs):
         if self.direction == Direction.LEFT:
             pass
             #self.move_left()
