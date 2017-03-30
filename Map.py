@@ -16,10 +16,11 @@ class Map:
 
     def entity_spawn(self, resource, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
-            kwargs["rect"] = pygame.Rect(x_pos, y_pos, 128, 128)
+            kwargs["rect"] = pygame.Rect(x_pos, y_pos, resource.image.get_width(), resource.image.get_height())
         if resource.id == "p":
             self.player = Player(image=resource.image, **kwargs)
         elif resource.type == "turret":
+            kwargs["rect"] = pygame.Rect(x_pos, y_pos, 64, 64)
             return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
         else:
             return Entity(image=resource.image, **kwargs)

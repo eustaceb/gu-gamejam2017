@@ -1,5 +1,5 @@
 from pygame.sprite import Sprite
-
+import pygame
 
 #This class represents every entity in the game
 class Entity(Sprite):
@@ -16,11 +16,10 @@ class Entity(Sprite):
         super(Entity, self).__init__()
 
         self.rect = rect
-        self.image = image
+        self.image = pygame.transform.scale(image, rect.size)
 
         self.solid = solid
         self.visible = visible
-
        
     def render(self, screen, camera):
         if self.image and self.rect and self.visible is True:
