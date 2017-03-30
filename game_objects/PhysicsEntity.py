@@ -86,6 +86,7 @@ class PhysicsEntity(Entity):
             self.blocked_left = False
 
             newrect = self.rect.move(self.x_velocity, self.y_velocity)
+
             if collisions:
                 for tile in collisions:
 
