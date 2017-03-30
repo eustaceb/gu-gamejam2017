@@ -58,12 +58,12 @@ class PhysicsEntity(Entity):
 
         self.handle_collisions(tilemap)
 
-        if self.x_velocity > 0 and not self.blocked_right \
-                or self.x_velocity < 0 and not self.blocked_left:
+        if (self.x_velocity > 0 and not self.blocked_right) \
+                or (self.x_velocity < 0 and not self.blocked_left):
             self.rect.x += self.x_velocity
 
-        if self.y_velocity > 0 and not self.blocked_bottom \
-                or self.y_velocity < 0 and not self.blocked_top:
+        if (self.y_velocity > 0 and not self.blocked_bottom) \
+                or (self.y_velocity < 0 and not self.blocked_top):
             self.rect.y += self.y_velocity
 
     def handle_collisions(self, tilemap):
