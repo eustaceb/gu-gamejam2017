@@ -67,6 +67,8 @@ class World:
             if frst.gone(time_now):
                 self.bullets.remove(frst)
 
+
+
     def process_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:

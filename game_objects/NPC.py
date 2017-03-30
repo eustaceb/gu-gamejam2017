@@ -49,7 +49,7 @@ class NPC(PhysicsEntity):
         print("wut")
         super(NPC, self).handle_collisions(tilemap)
 
-        tractors = pygame.sprite.spritecollide(self, self.tractor, False)
+        tractors = pygame.sprite.spritecollide(self, self.tractor, True)
 
         for tractor in tractors:
             print(tractor)
@@ -57,5 +57,4 @@ class NPC(PhysicsEntity):
                 print("WEWE")
                 self.player.score += 10
                 print(self.player.score)
-                self.kill()
-                self = None
+                #Delet this
