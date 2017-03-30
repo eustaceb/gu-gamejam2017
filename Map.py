@@ -14,15 +14,15 @@ class Map:
         self.entities = []
         self.player = None
 
-    def entity_spawn(self, id, x_pos=0, y_pos=0, **kwargs):
+    def entity_spawn(self, resource, x_pos=0, y_pos=0, **kwargs):
         if not "rect" in kwargs:
             kwargs["rect"] = pygame.Rect(x_pos, y_pos, 128, 128)
-        if id == "p":
-            self.player = Player(**kwargs)
-        elif id == "t":
-            self.entities.append(Turret(player=self.player, **kwargs))  # check if referenced correctly
+        if resource.id == "p":
+            self.player = Player(image=resource.image, **kwargs)
+        elif resource.type == "turret":
+            return Turret(image=resource.image, player=self.player, **kwargs)  # check if referenced correctly
         else:
-            self.entities.append(Entity(**kwargs))
+            return Entity(image=resource.image, **kwargs)
 
     def load_map(self, filename, resources):
         with open(str(filename), 'r') as f:
@@ -127,17 +127,9 @@ class Map:
                                 )
                                 tiles.append(tile)
                                 tile_map_populated = True
-                            elif tile_res.type == "turret":
-                                self.entities.append(self.entity_spawn(
-                                    id=tile_res.id,
-                                    image=tile_res.image,
-                                    x_pos=offset_x + x,
-                                    y_pos=offset_y + y
-                                ))
                             else:
                                 self.entities.append(self.entity_spawn(
-                                    id=tile_res.id,
-                                    image=tile_res.image,
+                                    resource=tile_res,
                                     x_pos=offset_x + x,
                                     y_pos=offset_y + y
                                 ))
