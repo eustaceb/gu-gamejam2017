@@ -32,7 +32,6 @@ class World:
         #for ent in self.entities:
         #    ent.render(screen, self.camera)
         self.player.render(screen, self.camera)
-        pygame.display.flip()
 
     def update(self):
         self.player.update(self.map.tilemaps.itervalues(), self.entities)

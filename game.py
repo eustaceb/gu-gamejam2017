@@ -51,8 +51,10 @@ def main():
         time_now = pygame.time.get_ticks()
         if (time_now - time_prev) >= 1000/60.0:
             game_world.update()
+            pygame.display.update((0,0,width,height))
             game_world.render(screen)
             time_prev = time_now
+
 
     print(width, height)
     print("Hello world")

@@ -119,7 +119,7 @@ class Map:
                     for id in tile_ids:
                         if id.isalnum():
                             tile_res = resources[id]
-                            if tile_res.type == "tile":
+                            if "tile" in tile_res.type:
                                 tile = Tile(
                                     rect=pygame.Rect(offset_x + x, offset_y + y, tile_res.image.get_width(),
                                                      tile_res.image.get_height()),
