@@ -46,16 +46,12 @@ class NPC(PhysicsEntity):
         super(NPC, self).update(tilemap, entities)
 
     def handle_collisions(self, tilemap):
-        print("wut")
         super(NPC, self).handle_collisions(tilemap)
 
         tractors = pygame.sprite.spritecollide(self, self.tractor, False)
 
         for tractor in tractors:
-            print(tractor)
             if tractor.enabled:
-                print("WEWE")
                 self.player.score += 10
-                print(self.player.score)
                 self.kill()
                 self = None

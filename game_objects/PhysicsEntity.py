@@ -94,7 +94,7 @@ class PhysicsEntity(Entity):
                         self.y_acceleration = 0
                         self.falling = False
 
-                        print("top")
+                        #print("top")
 
                         self.rect.bottom = tile.rect.top
 
