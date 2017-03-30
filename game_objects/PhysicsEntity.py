@@ -42,7 +42,6 @@ class PhysicsEntity(Entity):
         self.jumping = jumping
         self.falling = falling
 
-
     def update(self, tilemap=None, entities=None ):
         if self.falling and (self.gravity != 0 and self.gravity is not None):
             self.y_velocity += self.gravity
@@ -67,7 +66,6 @@ class PhysicsEntity(Entity):
                 or self.y_velocity < 0 and not self.blocked_top:
             self.rect.y += self.y_velocity
 
-
     def handle_collisions(self, tilemap):
         if tilemap:
             collisions = []
@@ -80,10 +78,11 @@ class PhysicsEntity(Entity):
             self.blocked_right = False
             self.blocked_left = False
 
+            newrect = self.rect.move(self.x_velocity, self.y_velocity)
             if collisions:
                 for tile in collisions:
 
-                    if collision.top(self.rect.move(self.x_velocity), tile):  # Moving down; Hit the top side of the wall
+                    if collision.top(newrect, tile.rect):  # Moving down; Hit the top side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
 
@@ -94,7 +93,7 @@ class PhysicsEntity(Entity):
 
                         self.blocked_bottom = True
 
-                    if collision.bottom(self, tile):  # Moving up; Hit the bottom side of the wall
+                    if collision.bottom(newrect, tile.rect):  # Moving up; Hit the bottom side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
 
@@ -105,7 +104,7 @@ class PhysicsEntity(Entity):
 
                         self.blocked_top = True
 
-                    if collision.left(self, tile):  # Moving right; Hit the left side of the wall
+                    if collision.left(newrect, tile.rect):  # Moving right; Hit the left side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
 
@@ -116,7 +115,7 @@ class PhysicsEntity(Entity):
 
                         self.blocked_left = True
 
-                    if collision.right(self, tile):  # Moving left; Hit the right side of the wall
+                    if collision.right(newrect, tile.rect):  # Moving left; Hit the right side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
                         self.rect.left = tile.rect.right
