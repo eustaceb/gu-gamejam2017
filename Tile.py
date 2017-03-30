@@ -36,5 +36,4 @@ class Tile:
 
     def render(self, screen):
         pos = (self.x*self.width, self.y*self.height)
-        pos = (100,100)
         screen.blit(self.get_image(), pos)

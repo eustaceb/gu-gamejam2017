@@ -1,6 +1,9 @@
+import random
+
 from enum import Enum
 
 from . import Entity
+
 
 # A villager that lives in the village
 class Villager(Entity):
@@ -15,8 +18,16 @@ class Villager(Entity):
         else:
             self.stop()
 
-        super(Villager, self).update()
+        switch_direction = random.randint(0,1000)
+        if switch_direction == 0:
+            if self.direction == Direction.LEFT:
+                self.direction = Direction.RIGHT
+            else:
+                self.direction = Direction.LEFT
+        elif switch_direction == 1000:
+            self.direction = Direction.STATIONARY
 
+        super(Villager, self).update()
 
 
 class Direction(Enum):

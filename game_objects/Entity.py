@@ -64,14 +64,26 @@ class Entity(Sprite):
         self.xvelocity += self.base_acceleration
 
     def slow(self):
-        if(self.x_velocity != 0):
-            if(self.x_velocity > 0):
+        if self.x_velocity != 0:
+            if self.x_velocity > 0:
                 if self.x_velocity < self.base_acceleration:
                     self.x_velocity = 0
                 else:
                     self.x_velocity -= self.base_acceleration
             else:
-                if(self.x_velocity > -self.base_acceleration):
+                if self.x_velocity > -self.base_acceleration:
                     self.x_velocity = 0
                 else:
                     self.x_velocity += self.base_acceleration
+
+        if self.y_velocity != 0:
+            if self.y_velocity > 0:
+                if self.y_velocity < self.base_acceleration:
+                    self.y_velocity = 0
+                else:
+                    self.y_velocity -= self.base_acceleration
+            else:
+                if self.y_velocity > -self.base_acceleration:
+                    self.y_velocity = 0
+                else:
+                    self.y_velocity += self.base_acceleration
