@@ -87,8 +87,6 @@ class PhysicsEntity(Entity):
                         self.y_velocity = 0
                         self.y_acceleration = 0
 
-                        print("top")
-
                         if self.rect.bottom > tile.rect.top:
                             self.rect.bottom = tile.rect.top
 
@@ -103,15 +101,11 @@ class PhysicsEntity(Entity):
                         if self.rect.top < tile.rect.bottom:
                             self.rect.top = tile.rect.bottom
 
-                        print("bottom")
-
                         self.blocked_top = True
 
                     if collision.left(newrect, tile.rect):  # Moving right; Hit the left side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
-
-                        print("left")
 
                         if self.rect.right > tile.rect.left:
                             self.rect.right = tile.rect.left
@@ -121,8 +115,6 @@ class PhysicsEntity(Entity):
                     if collision.right(newrect, tile.rect):  # Moving left; Hit the right side of the wall
                         self.x_velocity = 0
                         self.x_acceleration = 0
-
-                        print("right")
 
                         if self.rect.left < tile.rect.right:
                             self.rect.left = tile.rect.right
