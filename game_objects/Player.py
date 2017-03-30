@@ -2,6 +2,7 @@ from pygame.rect import Rect
 
 from game_objects.TractorBeam import TractorBeam
 from .PhysicsEntity import PhysicsEntity
+from .Bomb import Bomb
 import pygame
 
 # Wow its a playar
@@ -11,6 +12,7 @@ class Player(PhysicsEntity):
     tractor_beam = None
     score = 0
 
+    last_bomb = 0
     rotation_angle = 0
     max_rotation = 15
 
@@ -18,6 +20,7 @@ class Player(PhysicsEntity):
     key_down = pygame.K_s
     key_left = pygame.K_a
     key_right = pygame.K_d
+    key_bomb = pygame.K_SPACE
     original_image = None
 
     def __init__(self, **kwargs):
@@ -28,8 +31,10 @@ class Player(PhysicsEntity):
 
         super(Player, self).__init__(**kwargs)
         self.original_image = self.image
+        self.bombs = pygame.sprite.Group()
+        self.bomb_interval = 1000
 
-    def update(self, tilemap=None, entities=None, bullets=None, **kwargs):
+    def update(self, tilemap=None, entities=None, bullets=None, current_tick=0, **kwargs):
 
         key = pygame.key.get_pressed()
 
@@ -48,6 +53,9 @@ class Player(PhysicsEntity):
             self.move_right()
         else:
             self.slowX()
+
+        if key[self.key_bomb]:
+            self.bomb(current_tick)
 
         super(Player, self).update(tilemap, entities)
 
@@ -72,3 +80,8 @@ class Player(PhysicsEntity):
             self.health -= amount
             self.score -= amount
 
+    def bomb(self, current_tick):
+        if self.bomb_interval + self.last_bomb < current_tick:
+            rect = Rect(self.rect.midbottom, (16, 16))
+            self.bombs.add(Bomb(image=None, rect=rect))
+            self.last_bomb = current_tick
