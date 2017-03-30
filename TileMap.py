@@ -44,6 +44,7 @@ class TileMap:
         return self.data[y][x]
 
     def __iter__(self):
+        self.current = 0
         return self
 
     def next(self):
@@ -55,5 +56,4 @@ class TileMap:
 
     def render(self, screen):
         for t in self:
-            print(t)
             t.render(screen)
