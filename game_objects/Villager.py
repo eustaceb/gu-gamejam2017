@@ -2,11 +2,11 @@ import random
 
 from enum import Enum
 
-from . import Entity
+from .PhysicsEntity import PhysicsEntity
 
 
 # A villager that lives in the village
-class Villager(Entity):
+class Villager(PhysicsEntity):
 
     direction = Direction.LEFT
 
