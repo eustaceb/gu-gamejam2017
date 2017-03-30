@@ -1,7 +1,7 @@
 from pygame.sprite import Sprite
 
-#This class represents every entity in the game
 
+#This class represents every entity in the game
 class Entity(Sprite):
     # A Rect object specifying the dimensions of the entity
     rect = None

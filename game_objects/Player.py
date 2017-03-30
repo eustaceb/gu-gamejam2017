@@ -1,4 +1,5 @@
-from .Entity import *
+from .Entity import Entity
+
 import pygame
 import math
 
@@ -16,18 +17,21 @@ class Player(Entity):
     def update(self):
 
         key = pygame.key.get_pressed()
-        
-        if key[self.key_up]:
-            if not key[self.key_down]:
-                self.move_up()
-        elif key[self.key_down]:
-            self.move_down()
+        if key[self.key_up] or key[self.key_down] or key[self.key_left] or key[self.key_right]:
+            if key[self.key_up]:
+                if not key[self.key_down]:
+                    self.move_up()
+            elif key[self.key_down]:
+                self.move_down()
 
-        if key[self.key_left]:
-            if not key[self.key_right]:
-                self.move_left()
-        elif key[self.key_right]:
-            self.move_right()
+            if key[self.key_left]:
+                if not key[self.key_right]:
+                    self.move_left()
+            elif key[self.key_right]:
+                self.move_right()
+        else:
+            self.slow()
+>>>>>>> d369a2a5244fdccd342eb9fee4a37a3563848f94
 
         velocity = math.sqrt(math.pow(self.x_velocity, 2) + math.pow(self.y_velocity, 2))
 
