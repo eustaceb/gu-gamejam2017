@@ -33,8 +33,6 @@ class World:
             elif isinstance(self.entities[i], House):
                 self.entities[i].set_images(house_images)
 
-        player_sprite = pygame.image.load("assets/ufo.png")
-
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
         self.bg_surface = pygame.Surface(screen.get_size())
     

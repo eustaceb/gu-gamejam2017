@@ -70,4 +70,5 @@ class Player(PhysicsEntity):
     def damage(self, amount):
         if self.health > 0:
             self.health -= amount
+            self.score -= amount
 
