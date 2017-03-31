@@ -1,4 +1,6 @@
 import pygame
+
+from game_objects.Cthulhu import Cthulhu
 from game_objects.Entity import *
 from game_objects.Player import *
 import pygame, csv
@@ -17,6 +19,7 @@ class World:
         self.font = pygame.font.SysFont("Arial", 25)
         self.tilemaps = {}
         self.entities = []
+        self.genentities = Group()
         self.bullets = pygame.sprite.Group()
         self.resources = resources
         #self.tilemap = TileMap("map1.csv", self.resources)
@@ -51,7 +54,9 @@ class World:
             if random.randint(0,1)==0:
                 self.houses.add(House(320+x_positions[item]*64,382,player=self.player))
             else:
-                self.turrets.add(Turret(320+x_positions[item]*64,390,player=self.player))
+                turret = Turret(320+x_positions[item]*64,390,player=self.player)
+                turret.set_world(self)
+                self.turrets.add(turret)
 
             self.NPCs.add(Villager(320+x_positions[item]*64,382,player=self.player))
 
@@ -59,9 +64,10 @@ class World:
             if(item%3==0):
                 self.NPCs.add(Sheep(320+x_positions[item]*64,382,player=self.player))
 
-        self.entities += self.houses
-        self.entities += self.turrets
-        self.entities += self.NPCs
+        self.NPCs.add(Cthulhu(320+x_positions[len(x_positions)-1]*64,123,player=self.player))
+        self.genentities.add(self.houses)
+        self.genentities.add(self.turrets)
+        self.genentities.add(self.NPCs)
 
     def render(self, screen):
         screen.fill((0,0,0))
@@ -74,7 +80,11 @@ class World:
             if k=="bg":continue
             tilemap.render(screen, self.camera)
 
+        camera_sprite = Sprite()
+        camera_sprite.rect = self.camera
         for ent in self.entities:
+            ent.render(screen, self.camera)
+        for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
             ent.render(screen, self.camera)
         for bomb in self.player.bombs:
             bomb.render(screen, self.camera)
@@ -91,9 +101,13 @@ class World:
     def update(self, time_now):
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
                            bullets=self.bullets, current_tick=time_now)
+
+        camera_sprite = Sprite()
+        camera_sprite.rect = self.camera
         for ent in self.entities:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera)
-
+        for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
+            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera)
         for bul in self.bullets:
             bul.update()
         for bomb in self.player.bombs:
