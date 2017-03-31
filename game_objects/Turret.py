@@ -1,6 +1,9 @@
 import pygame
 import random
 import math
+
+from pygame.rect import Rect
+
 from .Bullet import Bullet
 from .Entity import Entity
 from collections import deque
@@ -8,7 +11,7 @@ import pygame
 
 
 class Turret(Entity):
-    def __init__(self, image, world=None, player=None, bullet_image=None,
+    def __init__(self, x, y, world=None, player=None, bullet_image=None,
                  shoot_interval=700, range=500, bullet_lifetime=2000, **kwargs):
         self.bullet_image = bullet_image
         self.shoot_interval = shoot_interval  # in milliseconds
@@ -17,7 +20,8 @@ class Turret(Entity):
         self.range = range
         self.last_shot = 0
         self.bullet_lifetime = bullet_lifetime
-        super(Turret, self).__init__(image=image, **kwargs)
+        image = pygame.image.load("assets/pink_cannon.png")
+        super(Turret, self).__init__(rect=Rect(x,y,64,64),image=image, **kwargs)
 
     def set_world(self, world):
         self.world = world

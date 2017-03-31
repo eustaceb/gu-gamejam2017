@@ -45,14 +45,14 @@ class NPC(PhysicsEntity):
             self.x_velocity = 0
             self.x_acceleration = 0
             self.direction = Direction.RIGHT
-            self.switch_timer = 500000
+            self.switch_timer = 500
             print("HIT LEFT")
 
         if (self.blocked_right):
             self.x_velocity = 0
             self.x_acceleration = 0
             self.direction = Direction.LEFT
-            self.switch_timer = 500000
+            self.switch_timer = 500
             print("HIT RIGHT")
 
         if self.direction == Direction.LEFT:

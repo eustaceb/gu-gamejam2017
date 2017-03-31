@@ -8,6 +8,7 @@ from Map import *
 from game_objects.House import *
 from collections import deque
 
+from game_objects.Sheep import Sheep
 from game_objects.Villager import Villager
 
 
@@ -21,7 +22,8 @@ class World:
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)
-        self.entities.append(Villager(self.player.rect.x, self.player.rect.y, player=self.player))
+
+        self.generate_entities()
 
         # Set player and world for turrets; house images for houses
         house_images = [resources["h1"].image, resources["h2"].image, resources["h3"].image,
@@ -35,7 +37,32 @@ class World:
 
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
         self.bg_surface = pygame.Surface(screen.get_size())
-    
+
+
+    def generate_entities(self):
+        citiness = random.randint(40, 150)
+        x_positions = range(1,200)
+        random.shuffle(x_positions)
+        self.houses = Group()
+        self.turrets = Group()
+        self.NPCs = Group()
+
+        for item in range(0,citiness):
+            if random.randint(0,1)==0:
+                self.houses.add(House(320+x_positions[item]*64,382,player=self.player))
+            else:
+                self.turrets.add(Turret(320+x_positions[item]*64,390,player=self.player))
+
+            self.NPCs.add(Villager(320+x_positions[item]*64,382,player=self.player))
+
+        for item in range(citiness, len(x_positions)):
+            if(item%3==0):
+                self.NPCs.add(Sheep(320+x_positions[item]*64,382,player=self.player))
+
+        self.entities += self.houses
+        self.entities += self.turrets
+        self.entities += self.NPCs
+
     def render(self, screen):
         screen.fill((0,0,0))
         #print(self.tilemaps.keys())
@@ -53,6 +80,7 @@ class World:
             bomb.render(screen, self.camera)
         for bul in self.bullets:
             bul.render(screen, self.camera)
+
         self.player.render(screen, self.camera)
 
         health_text = self.font.render("Health: " + str(self.player.health), 1, (255, 0, 0))

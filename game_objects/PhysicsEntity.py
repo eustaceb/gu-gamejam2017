@@ -31,12 +31,13 @@ class PhysicsEntity(Entity):
     jumping = False
     falling = True
 
-    def __init__(self, rect=None, image=None, x_velocity=0, y_velocity=0, gravity=1, falling=False,
+    def __init__(self, rect=None, image=None, x_velocity=0, y_velocity=0, max_velocity=10, gravity=1, falling=True,
                  jumping=False, *args, **kwargs):
         super(PhysicsEntity, self).__init__(rect=rect, image=image, *args, **kwargs)
 
         self.x_velocity = x_velocity
         self.y_velocity = y_velocity
+        self.max_velocity = max_velocity
 
         self.x_acceleration = 0
         self.y_acceleration = 0
