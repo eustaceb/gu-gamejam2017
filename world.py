@@ -82,9 +82,10 @@ class World:
 
         camera_sprite = Sprite()
         camera_sprite.rect = self.camera
-        for ent in self.entities:
-            ent.render(screen, self.camera)
+
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
+            ent.render(screen, self.camera)
+        for ent in self.entities:
             ent.render(screen, self.camera)
         for bomb in self.player.bombs:
             bomb.render(screen, self.camera)
