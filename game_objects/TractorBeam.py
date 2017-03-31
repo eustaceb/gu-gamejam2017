@@ -6,6 +6,9 @@ from .Entity import Entity
 class TractorBeam(Entity):
     player = None
     enabled = True
+    capacity = 100
+    recharging = False
+    charge_rate = 0.5
 
     key_activate = pygame.K_LSHIFT
 
@@ -17,10 +20,20 @@ class TractorBeam(Entity):
     def update(self, *args):
         key = pygame.key.get_pressed()
 
+        self.enabled = False
         if key[self.key_activate]:
-            self.enabled = True
+            if self.capacity > 1 and not self.recharging:
+                self.enabled = True
+                self.capacity -= 1
+            elif self.capacity <= 1:
+                self.recharging = True
         else:
-            self.enabled = False
+            if(self.capacity < 100):
+                self.capacity = min(100, self.capacity+self.charge_rate)
+
+            if(self.recharging):
+                if(self.capacity==100):
+                    self.recharging = False
 
         if(self.player):
             self.rect.midtop = (self.player.rect.midbottom[0], self.player.rect.midbottom[1])
