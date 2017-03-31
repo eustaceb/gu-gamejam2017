@@ -36,7 +36,7 @@ def main():
     while True:
         if section == game_world:
             if game_world.gameover:
-                menu = Menu(screen, game_world.player.score)
+                menu = Menu(screen, game_world.player.score, game_world.won)
                 menu.set_background(game_world.get_screen())
                 section = menu
                 continue
