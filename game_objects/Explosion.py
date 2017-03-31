@@ -14,7 +14,7 @@ class Explosion(Sprite):
         self.image = Explosion.explosion_frames[0]
         self.rect = rect
         self.frame = 0
-        self.power = 50000.0
+        self.power = 10000.0
 
     def update(self, tilemap=None, entities=None, camera=None, **kwargs):
         camera.centerx += random.randint(-10,10)
@@ -29,17 +29,19 @@ class Explosion(Sprite):
                 if (c.dead) : continue
                 c.dead = True
                 distance = (c.rect.centerx - self.rect.centerx)**2 + (c.rect.centery-self.rect.centery)**2
-                distance = max(1,distance)
-                force = 1.0/distance
-                c.max_velocity = 20
-                x_dir = -1.0 if c.rect.centerx < self.rect.centerx else 1.0
-                velocity_x = force * self.power * x_dir 
-                velocity_y = force * self.power * -1.0
-                #c.velocity_y = velocity_y
-                #c.velocity_x = velocity_x
-                c.acceleration_x = x_dir * 2.0
-                c.acceleration_y = -2.0
-                print("eh?")
+                distance = math.sqrt(distance)
+                vx = c.rect.centerx - self.rect.centerx
+                vx /= distance
+                vy = c.rect.centery - self.rect.centery
+                vy /= distance
+
+                c.max_velocity = 200
+                c.y_velocity = vx * 10
+                c.x_velocity = -abs(vy * 10.0)
+                c.x_acceration = 0
+                c.y_acceleration = 0
+                c.falling = True
+                print(vx,vy)
                 
 
         if self.frame >= len(Explosion.explosion_frames)*3:

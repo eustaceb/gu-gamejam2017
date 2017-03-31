@@ -29,6 +29,7 @@ class NPC(PhysicsEntity):
     def update(self, tilemap=None, entities=None, **kwargs):
         super(NPC, self).update(tilemap, entities)
         if(self.dead) : return
+        return
         if(self.switch_timer == 0):
             switch_direction = random.randint(0,50)
 
