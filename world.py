@@ -23,6 +23,9 @@ class World:
         self.genentities = Group()
         self.bullets = pygame.sprite.Group()
         self.resources = resources
+
+        pygame.mixer.music.load("assets/sounds/FragOutNCS.mp3")
+        pygame.mixer.music.play(-1)
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)
@@ -114,10 +117,10 @@ class World:
         camera_sprite.rect.center = center
 
         for ent in self.entities:
-            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs, houses=self.houses, turrets=self.turrets)
 
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
-            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera, world=self)
         for bul in self.bullets:
             bul.update()
         for bomb in self.player.bombs:

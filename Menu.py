@@ -2,7 +2,7 @@ import pygame
 
 
 class Menu:
-    def __init__(self, screen, score):
+    def __init__(self, screen, score, won):
         self.restart = False
         self.font_size = 64
         self.char_w = 36
@@ -10,7 +10,10 @@ class Menu:
         self.background = None
         self.draw_surface = pygame.Surface((screen.get_width(), screen.get_height()), pygame.SRCALPHA)
 
-        self.gover_str = "GAME OVER"
+        if won:
+            self.gover_str = "YOU WIN!!!"
+        else:
+            self.gover_str = "GAME OVER"
         self.score_str = "SCORE: " + str(score)
         self.restart_str = "RESTART (r)"
         self.quit_str = "QUIT (q)"
