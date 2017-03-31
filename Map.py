@@ -165,6 +165,8 @@ class Map:
                     self.tilemaps[layer] = tile_map
                     #print(layer)
 
+
+
         self.tilemaps = OrderedDict(sorted(self.tilemaps.items(), key=lambda x:x[0], reverse=True))
 
         return self.player, self.tilemaps, self.entities

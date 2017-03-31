@@ -34,12 +34,6 @@ i
 @offset 500 200
 p
 
-@offset 700 340
-t
-
-@offset 950 339
-h
-
 @collide off
 @bg
 @offset 0 0
