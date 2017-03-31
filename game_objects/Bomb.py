@@ -8,8 +8,12 @@ class Bomb(PhysicsEntity):
     def __init__(self, rect, image, player=None, **kwargs):
         image = Surface((rect.width, rect.height))
         image.fill((255, 100, 0))
+        if Bomb.bombimage == None:
+            Bomb.bombimage = pygame.image.load("./assets/bomb.png").convert_alpha()
+
         self.exploding = False
-        super(Bomb, self).__init__(rect, image, **kwargs)
+        
+        super(Bomb, self).__init__(rect, Bomb.bombimage, **kwargs)
 
     def update(self, tilemap=None, entities=None, camera=None, **kwargs):
         super(Bomb, self).update(tilemap, entities, camera=camera)
@@ -24,3 +28,4 @@ class Bomb(PhysicsEntity):
         for g in self.groups():
             g.remove(self)
 
+Bomb.bombimage = None
