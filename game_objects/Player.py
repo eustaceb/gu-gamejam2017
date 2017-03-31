@@ -79,8 +79,12 @@ class Player(PhysicsEntity):
 
     def damage(self, amount):
         if self.health > 0:
-            self.health -= amount
-            self.score -= amount
+            if self.health - amount < 0:
+                self.score -= self.health
+                self.health = 0
+            else:
+                self.health -= amount
+                self.score -= amount
 
     def bomb(self, current_tick):
         if self.bomb_interval + self.last_bomb < current_tick:
