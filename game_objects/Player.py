@@ -8,7 +8,7 @@ import pygame
 # Wow its a playar
 class Player(PhysicsEntity):
 
-    health = 100
+    health = 10
     tractor_beam = None
     score = 0
 

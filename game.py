@@ -1,10 +1,7 @@
-import pygame
 import sys
-import os
-
 from world import *
+from Menu import *
 
-from pygame.locals import *
 
 def load_resources(filename):
     resources = {}
@@ -18,18 +15,6 @@ def load_resources(filename):
             resources[res_id] = Resource(res_id, name.strip(), filename.strip(), res_type.strip())
     return resources
 
-#
-# def load_entity_resources():
-#     return {"p" : Resource("p", "player", "assets/ufo.png", "entity")}
-#
-#
-# def load_all_image_resources_as_tiles():
-#     resources = {}
-#     files = ["./assets/" + f for f in os.listdir("./assets") if f.endswith(".png") or f.endswith(".jpg") or f.endswith("gif") ]
-#     print(files)
-#     for i,v in enumerate(files):
-#         resources[str(i)] = Resource(str(i), v.lstrip("./assets")[:v.index(".")],v,"tile")
-#     return resources
 
 def main():
     pygame.init()
@@ -40,21 +25,32 @@ def main():
 
     screen = pygame.display.set_mode((int(width),int(height)),  )
     resources = load_resources("resources.csv")
-    #resources.update(load_entity_resources())
     game_world = World(screen, resources)
+    menu = Menu(screen) # TODO
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()
+    in_menu = False
     while True:
+        if in_menu:
+            section = menu
+        else:
+            section = game_world
         for event in pygame.event.get():
-            running = game_world.process_event(event)
-            if not running:
+            running = section.process_event(event)
+            if running == "quit":
                 sys.exit()
+            elif running == "gameover":
+                in_menu = True
+            elif running == "restart":
+                in_menu = False
+                game_world = World(screen, resources)
+                continue
 
         time_now = pygame.time.get_ticks()
         if (time_now - time_prev) >= 1000/60.0:
-            game_world.update(time_now)
+            section.update(time_now)
             pygame.display.update((0,0,width,height))
-            game_world.render(screen)
+            section.render(screen)
             time_prev = time_now
 
 if __name__ == "__main__":
