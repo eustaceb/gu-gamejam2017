@@ -62,8 +62,8 @@ class NPC(PhysicsEntity):
         else:
             self.slow()
 
-    def handle_collisions(self, tilemap):
-        super(NPC, self).handle_collisions(tilemap)
+    def handle_collisions(self, tilemap, **kwargs):
+        super(NPC, self).handle_collisions(tilemap, **kwargs)
 
         tractors = pygame.sprite.spritecollide(self, self.tractor, False)
 
