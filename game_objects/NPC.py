@@ -28,7 +28,9 @@ class NPC(PhysicsEntity):
 
     def update(self, tilemap=None, entities=None, **kwargs):
         super(NPC, self).update(tilemap, entities)
-        if(self.dead) : return
+        if(self.dead):
+            self.slowX()
+            return
 
         if(self.switch_timer == 0):
             switch_direction = random.randint(0,50)
@@ -60,7 +62,7 @@ class NPC(PhysicsEntity):
         elif self.direction == Direction.RIGHT:
             self.move_right()
         else:
-            self.slow()
+            self.slowX()
 
     def handle_collisions(self, tilemap, **kwargs):
         super(NPC, self).handle_collisions(tilemap, **kwargs)
