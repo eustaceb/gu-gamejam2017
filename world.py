@@ -83,9 +83,10 @@ class World:
 
         camera_sprite = Sprite()
         camera_sprite.rect = self.camera
-        for ent in self.entities:
-            ent.render(screen, self.camera)
+
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
+            ent.render(screen, self.camera)
+        for ent in self.entities:
             ent.render(screen, self.camera)
         for bomb in self.player.bombs:
             bomb.render(screen, self.camera)
@@ -108,7 +109,11 @@ class World:
             self.gameover = True
             return
         camera_sprite = Sprite()
-        camera_sprite.rect = self.camera
+        camera_sprite.rect = Rect(self.camera)
+        center = camera_sprite.rect.center
+        camera_sprite.rect.inflate_ip(300,0)
+        camera_sprite.rect.center = center
+
         for ent in self.entities:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs)
 
