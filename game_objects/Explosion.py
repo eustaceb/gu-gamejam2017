@@ -23,6 +23,16 @@ class Explosion(Sprite):
        
         self.frame += 1
         npcs = kwargs.get("npcs", None)
+        houses = kwargs.get("houses",None)
+
+        if houses:
+            collisions = spritecollide(self, houses, False)
+
+            for c in collisions:
+                if not c.destroyed and c.damage_timer == 0:
+                        c.damage()
+                        c.damage_timer = 50
+
         if npcs:
             collisions = spritecollide(self, npcs, False)
 

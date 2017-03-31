@@ -115,7 +115,7 @@ class World:
         camera_sprite.rect.center = center
 
         for ent in self.entities:
-            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs, houses=self.houses, turrets=self.turrets)
 
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
             ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera)
