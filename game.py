@@ -25,25 +25,29 @@ def main():
 
     screen = pygame.display.set_mode((int(width),int(height)),  )
     resources = load_resources("resources.csv")
+
     game_world = World(screen, resources)
-    menu = Menu(screen) # TODO
+    menu = None
+    section = game_world
+
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()
-    in_menu = False
+
     while True:
-        if in_menu:
-            section = menu
-        else:
-            section = game_world
+        if section == game_world:
+            if game_world.gameover:
+                menu = Menu(screen)
+                menu.set_background(game_world.get_screen())
+                section = menu
+                continue
+
         for event in pygame.event.get():
             running = section.process_event(event)
-            if running == "quit":
+            if running == -1:
                 sys.exit()
-            elif running == "gameover":
-                in_menu = True
-            elif running == "restart":
-                in_menu = False
+            elif running == 1:
                 game_world = World(screen, resources)
+                section = game_world
                 continue
 
         time_now = pygame.time.get_ticks()

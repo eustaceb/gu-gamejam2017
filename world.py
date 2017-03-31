@@ -42,7 +42,6 @@ class World:
         self.camera = pygame.Rect(0,0, screen.get_width(), screen.get_height())
         self.bg_surface = pygame.Surface(screen.get_size())
 
-
     def generate_entities(self):
         citiness = random.randint(40, 150)
         x_positions = range(1,200)
@@ -142,12 +141,11 @@ class World:
             if frst.gone(time_now):
                 self.bullets.remove(frst)
 
+    def get_screen(self):
+        return self.bg_surface
 
     def process_event(self, event):
         if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or event.type == pygame.QUIT:
-            return "quit"
-        if self.gameover:
-            self.gameover = False
-            return "gameover"
-        return "ok"
+            return -1
+        return 0
 
