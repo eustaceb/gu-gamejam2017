@@ -52,6 +52,7 @@ class World:
         self.houses = Group()
         self.turrets = Group()
         self.NPCs = Group()
+        self.Cthulhus = Group()
 
         for item in range(0,citiness):
             if random.randint(0,1)==0:
@@ -67,7 +68,9 @@ class World:
             if(item%3==0):
                 self.NPCs.add(Sheep(320+x_positions[item]*64,382,player=self.player))
 
-        self.NPCs.add(Cthulhu(320+x_positions[len(x_positions)-1]*64,123,player=self.player))
+        cthulhu = Cthulhu(320+x_positions[len(x_positions)-1]*64,123,player=self.player)
+        self.Cthulhus.add(cthulhu)
+        self.NPCs.add(cthulhu)
         self.genentities.add(self.houses)
         self.genentities.add(self.turrets)
         self.genentities.add(self.NPCs)
@@ -138,6 +141,17 @@ class World:
                     self.player.score += 10
                     self.NPCs.remove(scotty)
                     self.genentities.remove(scotty)
+
+        for cthulu in self.Cthulhus:
+            if cthulu.health <= 0:
+                self.player.score += 10000
+                self.Cthulhus.remove(cthulu)
+                self.NPCs.remove(cthulu)
+                self.genentities.remove(cthulu)
+
+                if len(self.Cthulhus) == 0:
+                    self.won = True
+                    self.gameover = True
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]

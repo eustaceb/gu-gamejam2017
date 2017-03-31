@@ -11,7 +11,7 @@ class Cthulhu(NPC):
 
     original = None
     shoot_timer = 0
-    health = 100
+    health = 200
 
     def __init__(self, x, y, **kwargs):
         self.bullet_image = None

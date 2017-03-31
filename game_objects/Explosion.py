@@ -40,7 +40,7 @@ class Explosion(Sprite):
             for c in collisions:
 
                 if c.__class__ == Cthulhu:
-                    print("CHTSHID")
+                    c.health -= 5
 
                 if(c.hitsound):
                     c.hitsound.play()
