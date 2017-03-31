@@ -62,7 +62,9 @@ class Player(PhysicsEntity):
         self.rotation_angle = self.x_velocity/self.max_velocity * self.max_rotation
 
         if self.x_velocity != 0:
+            center = self.rect.center
             self.image = pygame.transform.rotate(self.original_image, -self.rotation_angle)
+            self.rect.center = center
 
         bullet_collisions = pygame.sprite.spritecollide(self, bullets, True)
         collision_count = len(bullet_collisions)

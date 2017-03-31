@@ -12,7 +12,7 @@ g
 //Deep dirt
 @offset 0 512
 @repeat_h 212
-@repeat_v 3
+@repeat_v 5
 d
 
 //Left hand side invisible wall
