@@ -9,11 +9,13 @@ class TractorBeam(Entity):
     capacity = 100
     recharging = False
     charge_rate = 0.5
+    sound = None
 
     key_activate = pygame.K_LSHIFT
 
     def __init__(self, rect, player=None, **kwargs):
         self.player = player
+        self.sound = pygame.mixer.Sound("assets/sounds/yellwoowo.wav")
         super(TractorBeam, self).__init__(rect, pygame.image.load("assets/alien_beam2.png"), **kwargs)
 
 
@@ -25,9 +27,13 @@ class TractorBeam(Entity):
             if self.capacity > 1 and not self.recharging:
                 self.enabled = True
                 self.capacity -= 1
+                self.sound.play()
             elif self.capacity <= 1:
                 self.recharging = True
+                self.sound.stop()
         else:
+            self.sound.stop()
+
             if(self.capacity < 100):
                 self.capacity = min(100, self.capacity+self.charge_rate)
 
