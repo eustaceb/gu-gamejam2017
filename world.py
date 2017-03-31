@@ -142,6 +142,8 @@ class World:
             if frst.gone(time_now):
                 self.bullets.remove(frst)
 
+    def get_screen(self):
+        return self.bg_surface
 
     def process_event(self, event):
         if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or event.type == pygame.QUIT:

@@ -14,14 +14,15 @@ class Bullet(PhysicsEntity):
         y_velocity = y / distance * base_velocity
 
         #if bullet_image is None:
-        bullet_surface = Surface((8, 10), pygame.SRCALPHA)
-        bullet_surface.fill((0, 0, 0, 0))
-        bullet_image = Surface((2, 8))
-        bullet_image.fill((255, 200, 0))
-        bullet_surface.blit(bullet_image, (4, 1))
+        bullet_image = Surface((8, 8), pygame.SRCALPHA)
+        bullet_image.fill((0, 0, 0, 0))
+        pygame.draw.circle(bullet_image, (255, 200, 0), (4, 4), 4)
+        #bullet_image = Surface((2, 8))
+        #bullet_image.fill((255, 200, 0))
+        #bullet_surface.blit(bullet_image, (4, 1))
 
-        rotation_angle = (180/math.pi) * math.atan2(y, x) + 90
-        bullet_image = pygame.transform.rotate(bullet_surface, -rotation_angle)
+        #rotation_angle = (180/math.pi) * math.atan2(y, x) + 90
+        #bullet_image = pygame.transform.rotate(bullet_surface, -rotation_angle)
 
         rect = Rect(origin_pos, bullet_image.get_size())
         self.lifetime = lifetime

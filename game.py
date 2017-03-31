@@ -26,7 +26,7 @@ def main():
     screen = pygame.display.set_mode((int(width),int(height)),  )
     resources = load_resources("resources.csv")
     game_world = World(screen, resources)
-    menu = Menu(screen) # TODO
+    menu = Menu(screen)
     clock = pygame.time.Clock()
     time_prev = pygame.time.get_ticks()
     in_menu = False
@@ -41,6 +41,8 @@ def main():
                 sys.exit()
             elif running == "gameover":
                 in_menu = True
+                menu = Menu(screen)
+                menu.set_background(game_world.get_screen())
             elif running == "restart":
                 in_menu = False
                 game_world = World(screen, resources)
