@@ -17,6 +17,8 @@ class Turret(Entity):
         self.shoot_timer_max = shoot_timer_max
         self.shoot_timer = 0
         self.player = player
+        self.health = 3
+        self.damage_timer = 0
         self.world = world
         self.range = range
         self.bullet_lifetime = bullet_lifetime
@@ -46,6 +48,12 @@ class Turret(Entity):
 
         if self.shoot_timer > 0:
             self.shoot_timer-=1
+
+        if self.damage_timer > 0:
+            self.damage_timer-=1
+
+    def damage(self):
+        self.health -= 1
 
     def shoot(self, target_pos, lifetime):
         self.world.bullets.add(Bullet(self.rect.midtop, target_pos, lifetime, bullet_image=self.bullet_image))

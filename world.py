@@ -23,6 +23,7 @@ class World:
         self.genentities = Group()
         self.bullets = pygame.sprite.Group()
         self.resources = resources
+        self.won = False
 
         pygame.mixer.music.load("assets/sounds/FragOutNCS.mp3")
         pygame.mixer.music.play(-1)
@@ -123,7 +124,7 @@ class World:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs, houses=self.houses, turrets=self.turrets)
 
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
-            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera, world=self)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera, world=self, npcs=self.NPCs, houses=self.houses, turrets=self.turrets)
         for bul in self.bullets:
             bul.update()
         for bomb in self.player.bombs:
@@ -152,6 +153,11 @@ class World:
                 if len(self.Cthulhus) == 0:
                     self.won = True
                     self.gameover = True
+
+        for turret in self.turrets:
+            if turret.health <= 0:
+                self.turrets.remove(turret)
+                self.genentities.remove(turret)
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]

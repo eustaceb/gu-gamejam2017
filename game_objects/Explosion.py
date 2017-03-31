@@ -25,12 +25,21 @@ class Explosion(Sprite):
         self.frame += 1
         npcs = kwargs.get("npcs", None)
         houses = kwargs.get("houses",None)
+        turrets = kwargs.get("turrets",None)
 
         if houses:
             collisions = spritecollide(self, houses, False)
 
             for c in collisions:
                 if not c.destroyed and c.damage_timer == 0:
+                    c.damage()
+                    c.damage_timer = 50
+
+        if turrets:
+            collisions = spritecollide(self, turrets, False)
+
+            for c in collisions:
+                if c.damage_timer == 0:
                     c.damage()
                     c.damage_timer = 50
 
@@ -41,7 +50,9 @@ class Explosion(Sprite):
             for c in collisions:
 
                 if c.__class__ == Cthulhu:
-                    c.health -= 5
+                    if(c.invuln_frames <= 0):
+                        c.invuln_frames = c.invuln_default
+                        c.health -= 5
 
                 if(c.hitsound):
                     c.hitsound.play()

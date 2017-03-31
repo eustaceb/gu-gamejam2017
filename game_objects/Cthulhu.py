@@ -11,7 +11,9 @@ class Cthulhu(NPC):
 
     original = None
     shoot_timer = 0
-    health = 200
+    health = 100
+    invuln_frames = 0
+    invuln_default = 100
 
     def __init__(self, x, y, **kwargs):
         self.bullet_image = None
@@ -37,11 +39,14 @@ class Cthulhu(NPC):
 
                 targets = []
                 for x in range(0,random.randint(5,60)):
-                    self.shoot(world, (self.rect.centerx+random.randrange(0,10),self.rect.centery-random.randrange(0,10)),
+                    self.shoot(world, (self.rect.centerx+random.randrange(-10,10),self.rect.centery-random.randrange(0,10)),
                                self.bullet_lifetime)
 
         if self.shoot_timer > 0:
             self.shoot_timer-=1
+
+        if self.invuln_frames > 0:
+            self.invuln_frames -= 1
 
     def shoot(self, world, target_pos, lifetime):
         world.bullets.add(Bullet(self.rect.center, target_pos, lifetime, bullet_image=self.bullet_image))
