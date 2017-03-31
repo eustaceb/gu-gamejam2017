@@ -61,8 +61,7 @@ class PhysicsEntity(Entity):
             direction = math.atan2(self.y_velocity, self.x_velocity)
             self.y_velocity = math.sin(direction)*self.max_velocity
             self.x_velocity = math.cos(direction)*self.max_velocity
-
-        self.handle_collisions(tilemap)
+        self.handle_collisions(tilemap, entities=entities)
 
         if (self.x_velocity > 0 and not self.blocked_right) \
                 or (self.x_velocity < 0 and not self.blocked_left):
@@ -72,7 +71,7 @@ class PhysicsEntity(Entity):
                 or (self.y_velocity < 0 and not self.blocked_top):
             self.rect.y += self.y_velocity
 
-    def handle_collisions(self, tilemap):
+    def handle_collisions(self, tilemap, entities, **kwargs ):
         if tilemap:
             collisions = []
 
@@ -89,14 +88,14 @@ class PhysicsEntity(Entity):
 
             if collisions:
                 for tile in collisions:
-
+                    self.on_tile_collide(tile, entities ,**kwargs)
                     if collision.top(newrect, tile.rect):  # Moving down; Hit the top side of the wall
                         self.y_velocity = 0
                         self.y_acceleration = 0
                         self.falling = False
 
                         #print("top")
-
+                    
                         self.rect.bottom = tile.rect.top
 
                         self.blocked_bottom = True
@@ -162,4 +161,6 @@ class PhysicsEntity(Entity):
         else:
             self.x_acceleration = 0
             self.x_velocity = 0
+    def on_tile_collide(self, tile,entities, **kwargs):
+        pass
 

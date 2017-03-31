@@ -64,13 +64,16 @@ class World:
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
                            bullets=self.bullets, current_tick=time_now)
         for ent in self.entities:
-            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera)
 
         for bul in self.bullets:
             bul.update()
         for bomb in self.player.bombs:
-            bomb.update()
-        self.camera.center = self.player.rect.center
+            bomb.update(tilemap=self.map.tilemaps.itervalues(), camera=self.camera , entities=self.entities)
+        cam_x,cam_y = self.camera.center 
+        cam_x = cam_x + (self.player.rect.centerx-cam_x)*0.1
+        cam_y = cam_y + (self.player.rect.centery-cam_y)*0.1
+        self.camera.center = cam_x, cam_y
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]

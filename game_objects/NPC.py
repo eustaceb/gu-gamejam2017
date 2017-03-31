@@ -45,8 +45,8 @@ class NPC(PhysicsEntity):
 
         super(NPC, self).update(tilemap, entities)
 
-    def handle_collisions(self, tilemap):
-        super(NPC, self).handle_collisions(tilemap)
+    def handle_collisions(self, tilemap, **kwargs):
+        super(NPC, self).handle_collisions(tilemap, **kwargs)
 
         tractors = pygame.sprite.spritecollide(self, self.tractor, True)
 
