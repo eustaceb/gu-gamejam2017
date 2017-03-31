@@ -105,7 +105,11 @@ class World:
                            bullets=self.bullets, current_tick=time_now)
 
         camera_sprite = Sprite()
-        camera_sprite.rect = self.camera
+        camera_sprite.rect = Rect(self.camera)
+        center = camera_sprite.rect.center
+        camera_sprite.rect.inflate_ip(300,0)
+        camera_sprite.rect.center = center
+
         for ent in self.entities:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs)
 
