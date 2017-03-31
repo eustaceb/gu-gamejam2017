@@ -118,7 +118,7 @@ class World:
             ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs, houses=self.houses, turrets=self.turrets)
 
         for ent in pygame.sprite.spritecollide(camera_sprite, self.genentities, False):
-            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), bullets=self.bullets, tick=time_now, entities=self.entities, camera=self.camera, world=self)
         for bul in self.bullets:
             bul.update()
         for bomb in self.player.bombs:
