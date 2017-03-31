@@ -18,8 +18,10 @@ def load_resources(filename):
 
 def main():
     pygame.init()
+    pygame.mixer.init()
+    
     if len(sys.argv) != 3:
-        width, height = 800, 600
+        width, height = 1024, 768
     else:
         width, height = sys.argv[1], sys.argv[2]
 
