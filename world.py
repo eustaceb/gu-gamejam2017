@@ -158,6 +158,7 @@ class World:
             if turret.health <= 0:
                 self.turrets.remove(turret)
                 self.genentities.remove(turret)
+                self.player.score += 50
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]
