@@ -2,6 +2,7 @@ import random
 import pygame
 from pygame.sprite import Sprite
 from PhysicsEntity import *
+from game_objects.Cthulhu import Cthulhu
 
 explosion_frames = None
 
@@ -37,6 +38,10 @@ class Explosion(Sprite):
             collisions = spritecollide(self, npcs, False)
 
             for c in collisions:
+
+                if c.__class__ == Cthulhu:
+                    print("CHTSHID")
+
                 if(c.hitsound):
                     c.hitsound.play()
 

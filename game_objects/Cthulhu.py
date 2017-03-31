@@ -18,8 +18,8 @@ class Cthulhu(NPC):
         image = pygame.image.load("assets/cthulhu_full.png")
         self.original = image
         self.shoot_timer = 0
-        self.shoot_timer_max = 1000
-        self.bullet_lifetime = 500
+        self.shoot_timer_max = 400
+        self.bullet_lifetime = 300
         self.range = 1000
         super(Cthulhu, self).__init__(image=image, rect=Rect(x, y, 259, 259), max_velocity=4, **kwargs)
 

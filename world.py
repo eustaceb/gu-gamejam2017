@@ -23,6 +23,9 @@ class World:
         self.genentities = Group()
         self.bullets = pygame.sprite.Group()
         self.resources = resources
+
+        pygame.mixer.music.load("assets/sounds/FragOutNCS.mp3")
+        pygame.mixer.music.play(-1)
         #self.tilemap = TileMap("map1.csv", self.resources)
         self.map = Map()
         self.player, self.tilemaps, self.entities = self.map.load_map(filename="map2.txt", resources=self.resources)

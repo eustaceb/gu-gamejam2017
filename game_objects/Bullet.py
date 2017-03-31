@@ -9,9 +9,9 @@ class Bullet(PhysicsEntity):
 
         x = target_pos[0] - origin_pos[0]
         y = target_pos[1] - origin_pos[1]
-        distance = math.hypot(x, y)
-        x_velocity = x / distance * base_velocity
-        y_velocity = y / distance * base_velocity
+        direction = math.atan2(y,x)
+        x_velocity = math.cos(direction) * base_velocity
+        y_velocity = math.sin(direction) * base_velocity
 
         bullet_image = Surface((8, 8), pygame.SRCALPHA)
         bullet_image.fill((0, 0, 0, 0))
@@ -27,4 +27,4 @@ class Bullet(PhysicsEntity):
         super(Bullet, self).update(**kwargs)
 
     def gone(self, tick):
-        return self.lifetime <= 0
+        return self.lifetime < 0
