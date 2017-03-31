@@ -29,7 +29,7 @@ class PhysicsEntity(Entity):
     gravity = 1
     jump_velocity = 5
     jumping = False
-    falling = False
+    falling = True
 
     def __init__(self, rect=None, image=None, x_velocity=0, y_velocity=0, gravity=1, falling=False,
                  jumping=False, *args, **kwargs):

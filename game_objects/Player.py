@@ -84,11 +84,13 @@ class Player(PhysicsEntity):
 
     def bomb(self, current_tick):
         if self.bomb_interval + self.last_bomb < current_tick:
-            rect = Rect(self.rect.midbottom, (16, 16))
+            rect = Rect(self.rect.midbottom, (32, 32))
+            rect.midtop = self.rect.midbottom
             bomb = Bomb(image=None, rect=rect)
             bomb.x_velocity = self.x_velocity
             bomb.y_velocity = self.y_velocity
             bomb.x_acceleration = 0
             bomb.max_velocity = self.max_velocity*10
+            bomb.falling = True
             self.bombs.add(bomb)
             self.last_bomb = current_tick

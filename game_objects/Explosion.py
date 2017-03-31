@@ -1,6 +1,7 @@
 import random
 import pygame
 from pygame.sprite import Sprite
+from PhysicsEntity import *
 
 explosion_frames = None
 
@@ -18,8 +19,8 @@ class Explosion(Sprite):
         camera.centerx += random.randint(-10,10)
         camera.centery += random.randint(-10,10)
         self.image = Explosion.explosion_frames[self.frame//3  ]
+       
         self.frame += 1
-
         if self.frame >= len(Explosion.explosion_frames)*3:
             for g in self.groups():
                 g.remove(self)
