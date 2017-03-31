@@ -18,6 +18,7 @@ class World:
     def __init__(self, screen, resources):
         self.font = pygame.font.SysFont("Arial", 25)
         self.tilemaps = {}
+        self.gameover = False
         self.entities = []
         self.genentities = Group()
         self.bullets = pygame.sprite.Group()
@@ -104,7 +105,9 @@ class World:
     def update(self, time_now):
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
                            bullets=self.bullets, current_tick=time_now)
-
+        if self.player.health < 1:
+            self.gameover = True
+            return
         camera_sprite = Sprite()
         camera_sprite.rect = Rect(self.camera)
         center = camera_sprite.rect.center
@@ -140,11 +143,11 @@ class World:
                 self.bullets.remove(frst)
 
 
-
     def process_event(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_q:
-                return False 
-        if event.type == pygame.QUIT: return False
-        return True
+        if (event.type == pygame.KEYDOWN and event.key == pygame.K_q) or event.type == pygame.QUIT:
+            return "quit"
+        if self.gameover:
+            self.gameover = False
+            return "gameover"
+        return "ok"
 
