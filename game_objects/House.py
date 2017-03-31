@@ -32,7 +32,6 @@ class House(PhysicsEntity):
     def handle_collisions(self, tilemap, entities, **kwargs):
         super(House, self).handle_collisions(tilemap, entities, **kwargs)
 
-        print("TEST")
         if not self.destroyed and self.damage_timer == 0:
             collisions = pygame.sprite.spritecollide(self, self.player.bombs, False)
             if len(collisions) > 0:
@@ -40,7 +39,6 @@ class House(PhysicsEntity):
                 self.damage_timer = 50
 
     def damage(self):
-        print("BOOM!")
         if 0 < self.health <= len(self.images):
             self.image = self.images[len(self.images) - self.health]
         if self.health > 0:

@@ -19,6 +19,7 @@ class NPC(PhysicsEntity):
     switch_timer = 0
     direction = Direction.LEFT
     player = None
+    hitsound=None
 
     def __init__(self, rect, image, player=None, **kwargs):
         self.player = player
@@ -72,5 +73,3 @@ class NPC(PhysicsEntity):
         for tractor in tractors:
             if tractor.enabled:
                 self.y_acceleration = -2
-                print("COLLIDE!")
-                #Delet this

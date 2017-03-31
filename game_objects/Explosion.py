@@ -25,7 +25,11 @@ class Explosion(Sprite):
         npcs = kwargs.get("npcs", None)
         if npcs:
             collisions = spritecollide(self, npcs, False)
+
             for c in collisions:
+                if(c.hitsound):
+                    c.hitsound.play()
+
                 distance = math.sqrt(math.pow(c.rect.centerx - self.rect.centerx, 2)
                                      + math.pow(c.rect.centery-self.rect.centery, 2))
 
