@@ -4,6 +4,7 @@ import os
 
 from world import *
 
+from pygame.locals import *
 
 def load_resources(filename):
     resources = {}
@@ -37,7 +38,7 @@ def main():
     else:
         width, height = sys.argv[1], sys.argv[2]
 
-    screen = pygame.display.set_mode((width,height))
+    screen = pygame.display.set_mode((int(width),int(height)),  )
     resources = load_resources("resources.csv")
     #resources.update(load_entity_resources())
     game_world = World(screen, resources)
