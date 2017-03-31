@@ -33,10 +33,12 @@ class House(PhysicsEntity):
         super(House, self).handle_collisions(tilemap, entities, **kwargs)
 
     def damage(self):
+        self.player.score += 5
+
         if 0 < self.health <= len(self.images):
             self.image = self.images[len(self.images) - self.health]
         if self.health > 0:
             self.health -= 1
             if self.health <= 0:
                 self.destroyed = True
-                self.player.score += 5
+

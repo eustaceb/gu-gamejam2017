@@ -138,7 +138,7 @@ class World:
         for scotty in scottys:
             if scotty.__class__ != Cthulhu:
                 if(self.player.tractor_beam.enabled):
-                    self.player.score += 10
+                    self.player.score += 20
                     self.NPCs.remove(scotty)
                     self.genentities.remove(scotty)
 

@@ -31,8 +31,9 @@ class Explosion(Sprite):
 
             for c in collisions:
                 if not c.destroyed and c.damage_timer == 0:
-                        c.damage()
-                        c.damage_timer = 50
+                    c.damage()
+                    c.damage_timer = 50
+
 
         if npcs:
             collisions = spritecollide(self, npcs, False)
