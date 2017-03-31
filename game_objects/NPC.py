@@ -23,11 +23,12 @@ class NPC(PhysicsEntity):
     def __init__(self, rect, image, player=None, **kwargs):
         self.player = player
         self.tractor = Group(player.tractor_beam)
+        self.dead = False
         super(NPC, self).__init__(rect, image, **kwargs)
 
     def update(self, tilemap=None, entities=None, **kwargs):
         super(NPC, self).update(tilemap, entities)
-
+        if(self.dead) : return
         if(self.switch_timer == 0):
             switch_direction = random.randint(0,50)
 

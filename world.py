@@ -92,7 +92,7 @@ class World:
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
                            bullets=self.bullets, current_tick=time_now)
         for ent in self.entities:
-            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera)
+            ent.update(tilemap=self.map.tilemaps.itervalues(), tick=time_now, entities=self.entities, camera=self.camera, npcs=self.NPCs)
 
         for bul in self.bullets:
             bul.update()
