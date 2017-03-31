@@ -1,0 +1,44 @@
+//Top grass
+@collide off
+@offset 0 384
+@repeat_h 212
+f
+
+//Top grassy dirt
+@offset 0 448
+@repeat_h 212
+g
+
+//Deep dirt
+@offset 0 512
+@repeat_h 212
+@repeat_v 5
+d
+
+//Left hand side invisible wall
+@offset 320 0
+@repeat_v 7
+i
+
+//Ceiling invisible wall
+@offset 384 0
+@repeat_h 200
+i
+
+//Right hand side invisible wall
+@offset 13184 0
+@repeat_v 7
+i
+
+//Player
+@offset 500 200
+p
+
+@collide off
+@bg
+@offset 0 0
+@tile_grid 20 15 
+27 
+
+
+

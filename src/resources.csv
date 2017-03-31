@@ -1,0 +1,37 @@
+id,name,filename,type
+p, player, ./assets/ufo.png, player
+0, test, ./assets/new_grass.png, tile
+g, test, ./assets/new_new_grass.png, tile
+d, test, ./assets/dirt.png, tile
+f, test, ./assets/grass_top.png, tile
+i, test, ./assets/invisible_block.png, tile
+t, pink_turret, ./assets/pink_cannon.png, turret
+h , test, ./assets/house_windows.png, house
+h1 , test, ./assets/house_windows_damaged_1.png, house
+h2 , test, ./assets/house_windows_damaged_2.png, house
+h3 , test, ./assets/house_windows_damaged_3.png, house
+h4 , test, ./assets/house_windows_damaged_4.png, house
+h5 , test, ./assets/house_windows_damaged_final.png, house
+4  , test, ./assets/starry_night_moon.png, tile
+5  , test, ./assets/block_guy_brown_green.png, tile
+6  , test, ./assets/girl_walk.png, tile
+7  , test, ./assets/alien_beam.png, tile
+8  , test, ./assets/block_guy_brown_red.png, tile
+9  , test, ./assets/block_guy_yellow_green.png, tile
+10 , test, ./assets/block_guy_white_green.png, tile
+11 , test, ./assets/pepper_grass.png, tile
+12 , test, ./assets/block_guy_yellow_blue.png, tile
+14 , test, ./assets/block_guy_white_blue.png, tile
+15 , test, ./assets/simple_house.png, tile
+16 , test, ./assets/block_guy_brown_blue.png, tile
+17 , test, ./assets/block_guy_white_red.png, tile
+19 , test, ./assets/yellow_laser.png, tile
+21 , test, ./assets/block_guy_yellow_red.png, tile
+22 , test, ./assets/block_guy_yellow_pink.png, tile
+24 , test, ./assets/block_guy_white_pink.png, tile
+26 , test, ./assets/block_guy_brown_pink.png, tile
+27 , test, ./assets/starry_night.png, tile
+28 , test, ./assets/green_laser.png, tile
+29 , test, ./assets/red_laser.png, tile
+31 , test, ./assets/girl_walk_stand.png, tile
+x , block, ./assets/block.png , tile
