@@ -95,8 +95,10 @@ class World:
 
         health_text = self.font.render("Health: " + str(self.player.health), 1, (255, 0, 0))
         score_text = self.font.render("Score: " + str(self.player.score), 1, (255, 0, 0))
+        tractor_text = self.font.render("Tractor beam: " + str(self.player.tractor_beam.capacity) + "%", 1, (255, 0, 0))
         screen.blit(health_text, (0, 0))
-        screen.blit(score_text, (0, 50))
+        screen.blit(score_text, (0, 25))
+        screen.blit(tractor_text, (0, 50))
 
     def update(self, time_now):
         self.player.update(tilemap=self.map.tilemaps.itervalues(), entities=self.entities,
@@ -116,6 +118,14 @@ class World:
         cam_x = cam_x + (self.player.rect.centerx-cam_x)*0.1
         cam_y = cam_y + (self.player.rect.centery-cam_y)*0.1
         self.camera.center = cam_x, cam_y
+
+        scottys = pygame.sprite.spritecollide(self.player, self.NPCs, False)
+
+        for scotty in scottys:
+            if scotty.__class__ != Cthulhu:
+                self.player.score += 10
+                self.NPCs.remove(scotty)
+                self.genentities.remove(scotty)
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]

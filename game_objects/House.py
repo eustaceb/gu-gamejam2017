@@ -28,12 +28,14 @@ class House(Entity):
 
     def handle_collisions(self, tilemap):
         super(House, self).handle_collisions(tilemap)
+
         if not self.destroyed:
             collisions = pygame.sprite.spritecollide(self, self.player.bombs, True)
             if len(collisions) > 0:
                 self.damage()
 
     def damage(self):
+        print("BOOM!")
         if 0 < self.health <= len(self.images):
             self.image = self.images[len(self.images) - self.health]
         if self.health > 0:
