@@ -124,9 +124,10 @@ class World:
 
         for scotty in scottys:
             if scotty.__class__ != Cthulhu:
-                self.player.score += 10
-                self.NPCs.remove(scotty)
-                self.genentities.remove(scotty)
+                if(self.player.tractor_beam.enabled):
+                    self.player.score += 10
+                    self.NPCs.remove(scotty)
+                    self.genentities.remove(scotty)
 
         if len(self.bullets) > 0:  # Pop one by one, no need to iterate over the whole list due to freq updates
             frst = self.bullets.sprites()[0]
