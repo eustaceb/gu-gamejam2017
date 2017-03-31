@@ -16,6 +16,7 @@ class Direction(Enum):
 # A villager that lives in the village
 class NPC(PhysicsEntity):
 
+    switch_timer = 0
     direction = Direction.LEFT
     player = None
 
@@ -25,33 +26,49 @@ class NPC(PhysicsEntity):
         super(NPC, self).__init__(rect, image, **kwargs)
 
     def update(self, tilemap=None, entities=None, **kwargs):
+        super(NPC, self).update(tilemap, entities)
+
+        if(self.switch_timer == 0):
+            switch_direction = random.randint(0,50)
+
+            if switch_direction == 0:
+                if self.direction == Direction.LEFT:
+                    self.direction = Direction.RIGHT
+                else:
+                    self.direction = Direction.LEFT
+            elif switch_direction == 50:
+                self.direction = Direction.STATIONARY
+        else:
+            self.switch_timer -= 1
+
+        if(self.blocked_left):
+            self.x_velocity = 0
+            self.x_acceleration = 0
+            self.direction = Direction.RIGHT
+            self.switch_timer = 500000
+            print("HIT LEFT")
+
+        if (self.blocked_right):
+            self.x_velocity = 0
+            self.x_acceleration = 0
+            self.direction = Direction.LEFT
+            self.switch_timer = 500000
+            print("HIT RIGHT")
+
         if self.direction == Direction.LEFT:
-            pass
-            #self.move_left()
+            self.move_left()
         elif self.direction == Direction.RIGHT:
-            pass
-            #self.move_right()
+            self.move_right()
         else:
             self.slow()
 
-        switch_direction = random.randint(0,100)
-        if switch_direction == 0:
-            if self.direction == Direction.LEFT:
-                self.direction = Direction.RIGHT
-            else:
-                self.direction = Direction.LEFT
-        elif switch_direction == 100:
-            self.direction = Direction.STATIONARY
+    def handle_collisions(self, tilemap):
+        super(NPC, self).handle_collisions(tilemap)
 
-        super(NPC, self).update(tilemap, entities)
-
-    def handle_collisions(self, tilemap, **kwargs):
-        super(NPC, self).handle_collisions(tilemap, **kwargs)
-
-        tractors = pygame.sprite.spritecollide(self, self.tractor, True)
+        tractors = pygame.sprite.spritecollide(self, self.tractor, False)
 
         for tractor in tractors:
             if tractor.enabled:
-                self.player.score += 10
-                print(self.player.score)
+                self.y_acceleration = -2
+                print("COLLIDE!")
                 #Delet this

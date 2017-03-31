@@ -11,19 +11,19 @@ class TractorBeam(Entity):
 
     def __init__(self, rect, player=None, **kwargs):
         self.player = player
-        super(TractorBeam, self).__init__(rect, pygame.image.load("assets/alien_beam.png"), **kwargs)
+        super(TractorBeam, self).__init__(rect, pygame.image.load("assets/alien_beam2.png"), **kwargs)
 
 
     def update(self, *args):
         key = pygame.key.get_pressed()
 
-        if key[self.key_activate] and self.player.x_velocity==0:
+        if key[self.key_activate]:
             self.enabled = True
         else:
             self.enabled = False
 
         if(self.player):
-            self.rect.midtop = (self.player.rect.midbottom[0], self.player.rect.midbottom[1]-50)
+            self.rect.midtop = (self.player.rect.midbottom[0], self.player.rect.midbottom[1])
 
         super(Entity, self).update()
 
