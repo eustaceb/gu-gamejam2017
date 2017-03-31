@@ -12,4 +12,4 @@ class Villager(NPC):
         races = ["white", "brown", "yellow"]
         colours = ["blue", "green", "pink", "red"]
         image = pygame.image.load("assets/block_guy_"+random.choice(races)+"_"+random.choice(colours)+".png")
-        super(Villager, self).__init__(image=image, rect=Rect(x, y, 32, 32), max_velocity=random.randint(7,11),**kwargs)
+        super(Villager, self).__init__(image=image, rect=Rect(x, y, 32, 32), max_velocity=random.randint(7,9),**kwargs)

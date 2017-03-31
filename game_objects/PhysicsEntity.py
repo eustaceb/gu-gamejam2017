@@ -70,7 +70,7 @@ class PhysicsEntity(Entity):
                 or (self.y_velocity < 0 and not self.blocked_top):
             self.rect.y += self.y_velocity
 
-    def handle_collisions(self, tilemap, entities, **kwargs ):
+    def handle_collisions(self, tilemap, entities=None, **kwargs ):
         if tilemap:
             collisions = []
 
@@ -165,6 +165,7 @@ class PhysicsEntity(Entity):
         else:
             self.x_acceleration = 0
             self.x_velocity = 0
+
     def on_tile_collide(self, tile,entities, **kwargs):
         pass
 

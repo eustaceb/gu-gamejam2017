@@ -26,22 +26,12 @@ class Explosion(Sprite):
         if npcs:
             collisions = spritecollide(self, npcs, False)
             for c in collisions:
-                if (c.dead) : continue
-                c.dead = True
-                distance = (c.rect.centerx - self.rect.centerx)**2 + (c.rect.centery-self.rect.centery)**2
-                distance = math.sqrt(distance)
-                vx = c.rect.centerx - self.rect.centerx
-                vx /= distance
-                vy = c.rect.centery - self.rect.centery
-                vy /= distance
+                distance = math.sqrt(math.pow(c.rect.centerx - self.rect.centerx, 2)
+                                     + math.pow(c.rect.centery-self.rect.centery, 2))
 
-                c.max_velocity = 200
-                c.y_velocity = vx * 10
-                c.x_velocity = -abs(vy * 10.0)
-                c.x_acceration = 0
-                c.y_acceleration = 0
+                c.x_acceration = -c.max_acceleration
+                c.y_acceleration = -c.max_acceleration
                 c.falling = True
-                print(vx,vy)
                 
 
         if self.frame >= len(Explosion.explosion_frames)*3:
