@@ -66,8 +66,8 @@ class Menu:
         # Mouse events
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.restart_rect.collidepoint(event.pos[0], event.pos[1]):
-                return "restart"
+                return 1
             if self.quit_rect.collidepoint(event.pos[0], event.pos[1]):
-                return "quit"
-        return "ok"
+                return -1
+        return 0
 
